@@ -7,27 +7,25 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#070912;--panel:rgba(22,26,44,.72);--panel2:rgba(32,38,62,.6);
+  --bg:#070912;
+  --blob1:#6d28d9;--blob2:#0e7490;--blob3:#b45309;
+  --panel:rgba(22,26,44,.72);--panel2:rgba(32,38,62,.6);
   --stroke:rgba(255,255,255,.085);--txt:#e9edf8;--muted:#8b93ad;
   --gold:#ffd166;--gold2:#ffb020;--violet:#8b5cf6;--green:#34d399;
   --red:#f87171;--blue:#60a5fa;--orange:#fb923c;
 }
 html{scroll-behavior:smooth}
-body{
-  font-family:'Segoe UI',-apple-system,BlinkMacSystemFont,Roboto,'Helvetica Neue',sans-serif;
-  background:var(--bg);color:var(--txt);min-height:100vh;overflow-x:hidden;
-  -webkit-font-smoothing:antialiased;
-}
+body{font-family:'Segoe UI',-apple-system,BlinkMacSystemFont,Roboto,'Helvetica Neue',sans-serif;background:var(--bg);color:var(--txt);min-height:100vh;overflow-x:hidden;-webkit-font-smoothing:antialiased;transition:background .4s ease}
 ::-webkit-scrollbar{width:9px;height:9px}
 ::-webkit-scrollbar-track{background:transparent}
 ::-webkit-scrollbar-thumb{background:linear-gradient(180deg,rgba(255,209,102,.35),rgba(139,92,246,.35));border-radius:9px;border:2px solid var(--bg)}
 ::-webkit-scrollbar-thumb:hover{background:linear-gradient(180deg,rgba(255,209,102,.6),rgba(139,92,246,.6))}
 
 .bg{position:fixed;inset:0;overflow:hidden;z-index:0;pointer-events:none}
-.blob{position:absolute;border-radius:50%;filter:blur(100px);opacity:.5}
-.b1{width:560px;height:560px;background:#6d28d9;top:-180px;left:-160px;animation:f1 20s ease-in-out infinite}
-.b2{width:480px;height:480px;background:#0e7490;bottom:-180px;right:-140px;animation:f2 24s ease-in-out infinite}
-.b3{width:420px;height:420px;background:#b45309;top:45%;left:52%;opacity:.22;animation:f3 28s ease-in-out infinite}
+.blob{position:absolute;border-radius:50%;filter:blur(100px);opacity:.5;transition:background .6s ease}
+.b1{width:560px;height:560px;background:var(--blob1);top:-180px;left:-160px;animation:f1 20s ease-in-out infinite}
+.b2{width:480px;height:480px;background:var(--blob2);bottom:-180px;right:-140px;animation:f2 24s ease-in-out infinite}
+.b3{width:420px;height:420px;background:var(--blob3);top:45%;left:52%;opacity:.22;animation:f3 28s ease-in-out infinite}
 @keyframes f1{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(90px,70px) scale(1.15)}}
 @keyframes f2{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-90px,-60px) scale(1.12)}}
 @keyframes f3{0%,100%{transform:translate(0,0)}50%{transform:translate(-120px,80px)}}
@@ -45,7 +43,8 @@ body::after{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;back
 .logo-sub{font-size:10.5px;letter-spacing:2.4px;color:var(--muted);text-transform:uppercase;margin-top:3px}
 
 .player-bar{display:flex;align-items:center;gap:12px;padding:9px 16px 9px 9px;border-radius:18px;background:var(--panel);border:1px solid var(--stroke);backdrop-filter:blur(16px);box-shadow:0 10px 32px rgba(0,0,0,.4);position:relative}
-.mini-avatar{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;font-size:24px;background:linear-gradient(145deg,rgba(139,92,246,.35),rgba(96,165,250,.25));border:1px solid rgba(255,255,255,.14)}
+.mini-avatar{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;font-size:24px;background:linear-gradient(145deg,rgba(139,92,246,.35),rgba(96,165,250,.25));border:1px solid rgba(255,255,255,.14);overflow:hidden;flex-shrink:0}
+.mini-avatar img{width:100%;height:100%;object-fit:cover;display:block}
 .mini-name{font-weight:700;font-size:14px;max-width:150px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .mini-money{font-size:13px;font-weight:800;letter-spacing:.4px;background:linear-gradient(90deg,var(--gold),#ffe9a8,var(--gold2),var(--gold));background-size:200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shimmer 4s ease infinite}
 .money-pop{position:fixed;right:24px;top:60px;font-weight:900;pointer-events:none;animation:moneyPop 1.6s ease forwards;font-size:16px;z-index:300;text-shadow:0 0 16px rgba(52,211,153,.7)}
@@ -79,7 +78,6 @@ body::after{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;back
 .chip:hover{color:var(--txt);border-color:rgba(255,255,255,.22)}
 .chip.active{background:rgba(139,92,246,.24);border-color:rgba(139,92,246,.5);color:#c4b5fd;box-shadow:0 4px 18px rgba(139,92,246,.2)}
 
-/* --- ЦЕНОВОЙ ФИЛЬТР --- */
 .price-filter{display:flex;gap:12px;align-items:center;flex-wrap:wrap;padding:13px 15px;background:var(--panel);border:1px solid var(--stroke);border-radius:16px;margin-bottom:16px;backdrop-filter:blur(14px)}
 .pf-label{font-size:11.5px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.7px;flex-shrink:0}
 .pf-inputs{display:flex;gap:7px;align-items:center;min-width:220px;flex:1}
@@ -118,7 +116,6 @@ body::after{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;back
 .card-actions{display:flex;gap:8px;margin-top:4px}
 .card-actions .btn{flex:1;padding:10px 8px;font-size:12.5px;border-radius:11px}
 
-/* --- ПАГИНАЦИЯ --- */
 .pagination{margin-top:24px;padding:16px;background:var(--panel);border:1px solid var(--stroke);border-radius:18px;backdrop-filter:blur(14px);display:flex;flex-direction:column;gap:12px}
 .pg-info{text-align:center;font-size:12.5px;color:var(--muted);font-weight:600}
 .pg-info b{color:var(--gold);font-weight:800}
@@ -141,7 +138,7 @@ body::after{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;back
 .overlay.show .modal{transform:scale(1) translateY(0)}
 
 .modal-head{display:flex;align-items:center;gap:13px;margin-bottom:16px;flex-shrink:0}
-.mh-avatar{width:52px;height:52px;border-radius:16px;display:grid;place-items:center;font-size:26px;background:linear-gradient(145deg,rgba(139,92,246,.34),rgba(96,165,250,.22));border:1px solid rgba(255,255,255,.15);flex-shrink:0;box-shadow:0 8px 24px rgba(139,92,246,.25),inset 0 1px 0 rgba(255,255,255,.1)}
+.mh-avatar{width:52px;height:52px;border-radius:16px;display:grid;place-items:center;font-size:26px;background:linear-gradient(145deg,rgba(139,92,246,.34),rgba(96,165,250,.22));border:1px solid rgba(255,255,255,.15);flex-shrink:0;box-shadow:0 8px 24px rgba(139,92,246,.25),inset 0 1px 0 rgba(255,255,255,.1);overflow:hidden}
 .mh-name{font-weight:800;font-size:15.5px}
 .mh-sub{font-size:11.5px;color:var(--muted);margin-top:2px}
 .close-x{margin-left:auto;background:rgba(255,255,255,.07);border:1px solid var(--stroke);color:var(--muted);width:34px;height:34px;border-radius:11px;cursor:pointer;font-size:15px;transition:.18s;flex-shrink:0;font-family:inherit}
@@ -156,7 +153,8 @@ body::after{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;back
 .msg{display:flex;gap:9px;align-items:flex-end;animation:msgIn .3s ease}
 @keyframes msgIn{from{opacity:0;transform:translateY(9px)}to{opacity:1;transform:none}}
 .msg.me{flex-direction:row-reverse}
-.msg-av{width:30px;height:30px;border-radius:10px;display:grid;place-items:center;font-size:16px;background:rgba(255,255,255,.08);flex-shrink:0;border:1px solid var(--stroke)}
+.msg-av{width:30px;height:30px;border-radius:10px;display:grid;place-items:center;font-size:16px;background:rgba(255,255,255,.08);flex-shrink:0;border:1px solid var(--stroke);overflow:hidden}
+.msg-av img{width:100%;height:100%;object-fit:cover}
 .msg-bubble{padding:10px 14px;border-radius:16px;font-size:13.5px;line-height:1.45;max-width:78%;word-wrap:break-word;white-space:pre-wrap}
 .msg.npc .msg-bubble{background:rgba(255,255,255,.075);border:1px solid var(--stroke);border-bottom-left-radius:5px}
 .msg.me .msg-bubble{background:linear-gradient(135deg,rgba(255,209,102,.92),rgba(255,176,32,.92));color:#241a04;font-weight:600;border-bottom-right-radius:5px;box-shadow:0 4px 14px rgba(255,176,32,.18)}
@@ -164,13 +162,21 @@ body::after{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;back
 .msg-sys.ok{color:var(--green);border-color:rgba(52,211,153,.3);background:rgba(52,211,153,.1)}
 .msg-sys.bad{color:var(--red);border-color:rgba(248,113,113,.3);background:rgba(248,113,113,.1)}
 
-.chat-quick{display:flex;gap:7px;flex-wrap:wrap;margin:8px 0 10px;flex-shrink:0}
+.typing-bubble{padding:14px 18px;display:inline-flex;gap:5px;align-items:center;background:rgba(255,255,255,.075);border:1px solid var(--stroke);border-radius:16px;border-bottom-left-radius:5px;min-height:22px}
+.typing-dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.6);animation:typingBounce 1.2s infinite}
+.typing-dot:nth-child(2){animation-delay:.2s}
+.typing-dot:nth-child(3){animation-delay:.4s}
+@keyframes typingBounce{0%,60%,100%{transform:translateY(0);opacity:.4}30%{transform:translateY(-8px);opacity:1}}
+
+.chat-quick{display:flex;gap:7px;flex-wrap:wrap;margin:8px 0 10px;flex-shrink:0;transition:opacity .2s}
+.chat-quick.locked{opacity:.35;pointer-events:none}
 .qbtn{font-family:inherit;font-size:12px;font-weight:700;padding:8px 13px;border-radius:10px;background:rgba(139,92,246,.16);border:1px solid rgba(139,92,246,.35);color:#c4b5fd;cursor:pointer;transition:.18s}
 .qbtn:hover{background:rgba(139,92,246,.3);transform:translateY(-2px);box-shadow:0 4px 14px rgba(139,92,246,.25)}
 
 .chat-input{display:flex;gap:9px;flex-shrink:0}
 .chat-input input{flex:1;background:rgba(255,255,255,.06);border:1px solid var(--stroke);border-radius:13px;padding:13px 16px;color:var(--txt);font-size:13.5px;font-family:inherit;outline:none;transition:.2s}
 .chat-input input:focus{border-color:rgba(255,209,102,.5);background:rgba(255,255,255,.09);box-shadow:0 0 0 3px rgba(255,209,102,.1)}
+.chat-input input:disabled{opacity:.5;cursor:not-allowed}
 .chat-input input::placeholder{color:#5d6580}
 .chat-input .btn{padding:13px 20px}
 
@@ -181,7 +187,6 @@ body::after{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;back
 .field select option{background:#161a2c;color:var(--txt)}
 .hint{font-size:11.5px;color:var(--muted);margin-top:7px;line-height:1.5}
 
-/* --- СЛАЙДЕР ЦЕНЫ --- */
 .range-hint{display:flex;justify-content:space-between;gap:8px;font-size:11px;font-weight:700;margin-bottom:8px;flex-wrap:wrap}
 .range-hint .rh-min{color:var(--blue)}
 .range-hint .rh-mid{color:var(--gold);text-align:center}
@@ -197,7 +202,8 @@ input[type="range"].price-slider::-moz-range-thumb{width:26px;height:26px;border
 @media(max-width:760px){.profile-grid{grid-template-columns:1fr}}
 .profile-card{background:var(--panel);border:1px solid var(--stroke);border-radius:22px;padding:24px;backdrop-filter:blur(16px);text-align:center;position:relative;overflow:hidden}
 .profile-card::before{content:'';position:absolute;top:-60%;left:-20%;width:140%;height:180%;background:radial-gradient(circle,rgba(139,92,246,.2),transparent 62%);pointer-events:none}
-.big-avatar{width:104px;height:104px;border-radius:32px;display:grid;place-items:center;font-size:52px;margin:0 auto 16px;background:linear-gradient(145deg,rgba(139,92,246,.4),rgba(96,165,250,.28));border:1px solid rgba(255,255,255,.2);position:relative;z-index:1;box-shadow:0 14px 42px rgba(139,92,246,.3),inset 0 1px 0 rgba(255,255,255,.16)}
+.big-avatar{width:104px;height:104px;border-radius:32px;display:grid;place-items:center;font-size:52px;margin:0 auto 16px;background:linear-gradient(145deg,rgba(139,92,246,.4),rgba(96,165,250,.28));border:1px solid rgba(255,255,255,.2);position:relative;z-index:1;box-shadow:0 14px 42px rgba(139,92,246,.3),inset 0 1px 0 rgba(255,255,255,.16);overflow:hidden}
+.big-avatar img{width:100%;height:100%;object-fit:cover;display:block}
 .profile-name{font-size:21px;font-weight:900;position:relative;z-index:1}
 .profile-rank{font-size:12px;color:var(--gold);font-weight:800;letter-spacing:1.4px;text-transform:uppercase;margin-top:6px;position:relative;z-index:1}
 .avatar-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-top:12px}
@@ -211,6 +217,28 @@ input[type="range"].price-slider::-moz-range-thumb{width:26px;height:26px;border
 .save-badge{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:700;color:var(--green);background:rgba(52,211,153,.1);border:1px solid rgba(52,211,153,.3);padding:5px 11px;border-radius:9px;margin-top:12px}
 .save-badge.pulse{animation:savePulse 1.6s ease-in-out infinite}
 @keyframes savePulse{0%,100%{opacity:1}50%{opacity:.55}}
+
+/* --- НАСТРОЙКИ --- */
+.settings-grid{display:grid;grid-template-columns:1fr;gap:16px;max-width:800px;margin:0 auto}
+.settings-card{background:var(--panel);border:1px solid var(--stroke);border-radius:22px;padding:22px;backdrop-filter:blur(16px);position:relative}
+.settings-card h3{font-size:14px;font-weight:800;color:var(--gold);margin-bottom:14px;letter-spacing:.8px;text-transform:uppercase;display:flex;align-items:center;gap:8px}
+.themes-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:10px}
+.theme-card{padding:14px 10px;border-radius:14px;background:rgba(255,255,255,.05);border:2px solid var(--stroke);cursor:pointer;transition:.22s;text-align:center;font-family:inherit;color:var(--txt);position:relative;overflow:hidden}
+.theme-card:hover{border-color:rgba(255,255,255,.3);transform:translateY(-3px)}
+.theme-card.active{border-color:var(--gold);background:rgba(255,209,102,.12);box-shadow:0 6px 24px rgba(255,209,102,.2)}
+.theme-preview{width:100%;height:52px;border-radius:10px;margin-bottom:8px;position:relative;overflow:hidden;box-shadow:inset 0 0 0 1px rgba(255,255,255,.1)}
+.theme-preview::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 30% 40%,var(--tp1),transparent 60%),radial-gradient(circle at 70% 60%,var(--tp2),transparent 60%),var(--tp-bg)}
+.theme-name{font-size:12px;font-weight:800;color:var(--txt)}
+.theme-card.active .theme-name{color:var(--gold)}
+.theme-check{position:absolute;top:6px;right:6px;width:20px;height:20px;border-radius:50%;background:var(--gold);color:#231a04;display:grid;place-items:center;font-size:12px;font-weight:900;opacity:0;transition:.2s}
+.theme-card.active .theme-check{opacity:1}
+
+.avatar-upload{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+.upload-preview{width:96px;height:96px;border-radius:24px;background:rgba(255,255,255,.08);border:2px dashed var(--stroke);display:grid;place-items:center;font-size:40px;flex-shrink:0;overflow:hidden;transition:.2s}
+.upload-preview img{width:100%;height:100%;object-fit:cover}
+.upload-actions{flex:1;min-width:200px}
+.upload-actions .btn{margin-bottom:8px}
+.upload-input{display:none}
 
 .listing{display:flex;align-items:center;gap:14px;padding:15px;border-radius:18px;background:var(--panel);border:1px solid var(--stroke);backdrop-filter:blur(14px);margin-bottom:11px;transition:.2s;flex-wrap:wrap}
 .listing:hover{border-color:rgba(255,255,255,.19);box-shadow:0 12px 32px rgba(0,0,0,.35)}
@@ -249,6 +277,7 @@ input[type="range"].price-slider::-moz-range-thumb{width:26px;height:26px;border
   .pf-inputs{min-width:0}
   .page-btn{min-width:34px;height:34px;font-size:12px}
   .page-btn.page-nav{padding:0 10px}
+  .themes-grid{grid-template-columns:repeat(2,1fr)}
 }
 </style>
 </head>
@@ -287,74 +316,100 @@ const round100 = n => Math.max(100, Math.round(n / 100) * 100);
 const fmt = n => Math.round(n).toLocaleString('ru-RU') + ' ₽';
 const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const fmtTime = m => { m = Math.max(0, Math.round(m)); const h = Math.floor(m / 60), mm = m % 60; return h <= 0 ? mm + ' мин' : h + ' ч ' + (mm ? mm + ' м' : ''); };
+const sleep = ms => new Promise(r => setTimeout(r, ms));
 
-/* ===== БАЗОВЫЙ КАТАЛОГ (134) ===== */
+/* ===== ТЕМЫ ===== */
+const THEMES = {
+  space:   { name: 'Космос', bg: '#070912', b1: '#6d28d9', b2: '#0e7490', b3: '#b45309' },
+  ocean:   { name: 'Океан',  bg: '#04141f', b1: '#0891b2', b2: '#0369a1', b3: '#06b6d4' },
+  sunset:  { name: 'Закат',  bg: '#1a0d05', b1: '#ea580c', b2: '#dc2626', b3: '#f59e0b' },
+  forest:  { name: 'Лес',    bg: '#05140d', b1: '#059669', b2: '#16a34a', b3: '#84cc16' },
+  cyber:   { name: 'Кибер',  bg: '#0a0514', b1: '#ec4899', b2: '#a855f7', b3: '#06b6d4' },
+  midnight:{ name: 'Полночь',bg: '#0a0a0a', b1: '#334155', b2: '#475569', b3: '#1e293b' },
+};
+
+function applyTheme(key) {
+  const t = THEMES[key] || THEMES.space;
+  document.documentElement.style.setProperty('--bg', t.bg);
+  document.documentElement.style.setProperty('--blob1', t.b1);
+  document.documentElement.style.setProperty('--blob2', t.b2);
+  document.documentElement.style.setProperty('--blob3', t.b3);
+  document.body.style.background = t.bg;
+}
+
+/* ===== КАТАЛОГ: ~180 базовых × 50 вариантов = ~9000 товаров ===== */
+// Формат: [name, emoji, cat, price]
+const T='Техника',M='Мебель',A='Авто',R='Разное',I='Инструменты',S='Спорт';
 const BASES = [
-  {n:'iPhone 14 Pro',e:'📱',c:'Техника',v:78000},{n:'iPhone 13 mini',e:'📱',c:'Техника',v:48000},{n:'iPhone 15 Pro Max',e:'📱',c:'Техника',v:135000},
-  {n:'MacBook Air M2',e:'💻',c:'Техника',v:95000},{n:'MacBook Pro 14 M3',e:'💻',c:'Техника',v:165000},
-  {n:'PlayStation 5',e:'🎮',c:'Техника',v:42000},{n:'PlayStation 4 Pro',e:'🎮',c:'Техника',v:21000},
-  {n:'Xbox Series X',e:'🕹️',c:'Техника',v:40000},{n:'Nintendo Switch OLED',e:'🎮',c:'Техника',v:27000},
-  {n:'Samsung Galaxy S23',e:'📱',c:'Техника',v:52000},{n:'Samsung Galaxy S21',e:'📱',c:'Техника',v:28000},{n:'Xiaomi 13T Pro',e:'📱',c:'Техника',v:32000},
-  {n:'iPad Pro 11"',e:'📲',c:'Техника',v:61000},{n:'iPad Air 5',e:'📲',c:'Техника',v:38000},
-  {n:'Sony WH-1000XM5',e:'🎧',c:'Техника',v:24000},{n:'AirPods Pro 2',e:'🎧',c:'Техника',v:17000},
-  {n:'Dyson V15 Detect',e:'🧹',c:'Техника',v:38000},{n:'Кофемашина DeLonghi',e:'☕',c:'Техника',v:33000},
-  {n:'Телевизор LG OLED',e:'📺',c:'Техника',v:88000},{n:'Samsung QLED 65"',e:'📺',c:'Техника',v:62000},{n:'Xiaomi Mi TV 55',e:'📺',c:'Техника',v:34000},
-  {n:'Canon EOS R50',e:'📷',c:'Техника',v:56000},{n:'Sony A7 III',e:'📷',c:'Техника',v:145000},
-  {n:'GoPro Hero 11',e:'📹',c:'Техника',v:32000},{n:'Дрон DJI Mini 3',e:'🛸',c:'Техника',v:44000},{n:'Дрон DJI Air 3',e:'🛸',c:'Техника',v:95000},
-  {n:'Роутер ASUS RT-AX',e:'📡',c:'Техника',v:7000},{n:'Робот-пылесос Xiaomi',e:'🤖',c:'Техника',v:18000},{n:'Roborock S8',e:'🤖',c:'Техника',v:52000},
-  {n:'Проектор Epson',e:'📽️',c:'Техника',v:37000},{n:'Электросамокат Kugoo',e:'🛴',c:'Техника',v:21000},
-  {n:'Микроволновка Samsung',e:'🍲',c:'Техника',v:8500},{n:'Холодильник Bosch',e:'🧊',c:'Техника',v:54000},
-  {n:'Samsung Galaxy Watch 6',e:'⌚',c:'Техника',v:25000},{n:'Kindle Paperwhite',e:'📖',c:'Техника',v:13000},{n:'Фотопринтер Canon',e:'🖨️',c:'Техника',v:12000},
-  {n:'Диван «Осло»',e:'🛋️',c:'Мебель',v:47000},{n:'Диван-кровать IKEA',e:'🛋️',c:'Мебель',v:28000},{n:'Кресло Eames',e:'🪑',c:'Мебель',v:26000},
-  {n:'Кресло-мешок',e:'🪑',c:'Мебель',v:6000},{n:'Кресло-качалка',e:'🪑',c:'Мебель',v:20000},
-  {n:'Стол дубовый',e:'🪵',c:'Мебель',v:31000},{n:'Стол журнальный',e:'🪵',c:'Мебель',v:9500},{n:'Письменный стол',e:'🪵',c:'Мебель',v:16000},
-  {n:'Шкаф-купе 3-дверный',e:'🚪',c:'Мебель',v:23000},{n:'Шкаф-пенал',e:'🚪',c:'Мебель',v:14000},
-  {n:'Кровать с подъёмником',e:'🛏️',c:'Мебель',v:35000},{n:'Кровать двуспальная',e:'🛏️',c:'Мебель',v:22000},
-  {n:'Комод ретро',e:'🗄️',c:'Мебель',v:14000},{n:'Комод ИКЕА',e:'🗄️',c:'Мебель',v:7500},
-  {n:'Стеллаж открытый',e:'📚',c:'Мебель',v:11000},{n:'Полка настенная',e:'📚',c:'Мебель',v:3500},
-  {n:'Барный стул',e:'🪑',c:'Мебель',v:5500},{n:'Офисное кресло',e:'🪑',c:'Мебель',v:18000},
-  {n:'Зеркало в раме',e:'🪞',c:'Мебель',v:8500},{n:'Пуф кожаный',e:'🪑',c:'Мебель',v:7000},{n:'Тумба под ТВ',e:'📺',c:'Мебель',v:9000},{n:'Вешалка напольная',e:'🧥',c:'Мебель',v:5000},
-  {n:'BMW 320i (2016)',e:'🚗',c:'Авто',v:1150000},{n:'BMW X5 (2018)',e:'🚙',c:'Авто',v:3200000},
-  {n:'Lada Vesta (2019)',e:'🚙',c:'Авто',v:720000},{n:'Lada Granta (2020)',e:'🚙',c:'Авто',v:550000},
-  {n:'Kia Rio (2018)',e:'🚘',c:'Авто',v:640000},{n:'Kia Sportage (2019)',e:'🚙',c:'Авто',v:1450000},
-  {n:'Toyota Camry (2015)',e:'🚖',c:'Авто',v:1250000},{n:'Toyota RAV4 (2017)',e:'🚙',c:'Авто',v:1850000},
-  {n:'Hyundai Solaris (2017)',e:'🚘',c:'Авто',v:620000},{n:'Hyundai Tucson (2020)',e:'🚙',c:'Авто',v:1750000},
-  {n:'Volkswagen Polo (2018)',e:'🚘',c:'Авто',v:680000},{n:'Mercedes C-Class (2017)',e:'🚗',c:'Авто',v:1950000},
-  {n:'Audi A4 (2016)',e:'🚗',c:'Авто',v:1650000},{n:'Yamaha MT-07',e:'🏍️',c:'Авто',v:380000},{n:'Honda CB500F',e:'🏍️',c:'Авто',v:320000},
-  {n:'Газель (2018)',e:'🚐',c:'Авто',v:950000},{n:'Прицеп легковой',e:'🚛',c:'Авто',v:85000},
-  {n:'Велосипед Trek',e:'🚲',c:'Разное',v:34000},{n:'Велосипед Stels',e:'🚲',c:'Разное',v:12000},
-  {n:'Гитара Fender',e:'🎸',c:'Разное',v:28000},{n:'Гитара Yamaha',e:'🎸',c:'Разное',v:15000},
-  {n:'Синтезатор Casio',e:'🎹',c:'Разное',v:22000},{n:'Casio G-Shock',e:'⌚',c:'Разное',v:15000},
-  {n:'Apple Watch S9',e:'⌚',c:'Разное',v:32000},{n:'Nike Air Max',e:'👟',c:'Разное',v:9000},
-  {n:'Adidas Ultraboost',e:'👟',c:'Разное',v:11000},{n:'Куртка The North Face',e:'🧥',c:'Разное',v:18000},
-  {n:'Кожаная куртка',e:'🧥',c:'Разное',v:24000},{n:'Сумка Michael Kors',e:'👜',c:'Разное',v:16000},
-  {n:'Рюкзак Samsonite',e:'🎒',c:'Разное',v:8000},{n:'Очки Ray-Ban',e:'🕶️',c:'Разное',v:12000},
-  {n:'Книга «Мастер и Маргарита» (антикв.)',e:'📖',c:'Разное',v:14000},{n:'Виниловая пластинка Beatles',e:'💿',c:'Разное',v:22000},
-  {n:'Коллекционная фигурка Funko',e:'🧸',c:'Разное',v:4500},{n:'LEGO Technic 42115',e:'🧱',c:'Разное',v:27000},
-  {n:'Настольная игра Catan',e:'🎲',c:'Разное',v:5500},{n:'Пылесос вертикальный',e:'🧹',c:'Разное',v:8000},
-  {n:'Утюг Philips',e:'🔌',c:'Разное',v:4500},{n:'Фен Dyson Supersonic',e:'💇',c:'Разное',v:28000},
-  {n:'Эпилятор Braun',e:'💅',c:'Разное',v:11000},{n:'Триммер Philips',e:'💈',c:'Разное',v:6500},
-  {n:'Мультиварка Redmond',e:'🍲',c:'Разное',v:8500},{n:'Кофемолка ручная',e:'☕',c:'Разное',v:4000},{n:'Набор ножей Wüsthof',e:'🔪',c:'Разное',v:16000},
-  {n:'Перфоратор Bosch',e:'🔨',c:'Инструменты',v:18000},{n:'Дрель Makita',e:'🔩',c:'Инструменты',v:12000},
-  {n:'Шуруповёрт DeWalt',e:'🔧',c:'Инструменты',v:14000},{n:'Болгарка Bosch',e:'⚙️',c:'Инструменты',v:8500},
-  {n:'Лобзик Makita',e:'🪚',c:'Инструменты',v:9500},{n:'Сварочный аппарат',e:'🔥',c:'Инструменты',v:22000},
-  {n:'Компрессор воздушный',e:'💨',c:'Инструменты',v:16000},{n:'Набор отвёрток Kraftool',e:'🪛',c:'Инструменты',v:4500},
-  {n:'Пила цепная Stihl',e:'🪓',c:'Инструменты',v:24000},{n:'Газонокосилка',e:'⛏️',c:'Инструменты',v:18000},
-  {n:'Мотоблок',e:'🚜',c:'Инструменты',v:32000},{n:'Генератор бензиновый',e:'⚡',c:'Инструменты',v:28000},
-  {n:'Набор ключей JTC',e:'🔧',c:'Инструменты',v:7800},{n:'Уровень лазерный',e:'📏',c:'Инструменты',v:12000},
-  {n:'Пылесос строительный',e:'🧹',c:'Инструменты',v:9500},{n:'Культиватор ручной',e:'🌱',c:'Инструменты',v:9000},
-  {n:'Беговая дорожка',e:'🏃',c:'Спорт',v:45000},{n:'Велотренажёр',e:'🚴',c:'Спорт',v:28000},
-  {n:'Гантели разборные',e:'🏋️',c:'Спорт',v:14000},{n:'Штанга с блинами',e:'🏋️',c:'Спорт',v:32000},
-  {n:'Скамья для жима',e:'🏋️',c:'Спорт',v:18000},{n:'Боксёрская груша',e:'🥊',c:'Спорт',v:12000},
-  {n:'Перчатки боксёрские',e:'🥊',c:'Спорт',v:6500},{n:'Коврик для йоги',e:'🧘',c:'Спорт',v:2500},
-  {n:'Лыжи горные',e:'⛷️',c:'Спорт',v:24000},{n:'Сноуборд',e:'🏂',c:'Спорт',v:32000},
-  {n:'Палатка 4-местная',e:'⛺',c:'Спорт',v:18000},{n:'Спальный мешок',e:'🛏️',c:'Спорт',v:8500},
-  {n:'Радиоуправляемый вертолёт',e:'🚁',c:'Спорт',v:7500},{n:'Скейтборд',e:'🛹',c:'Спорт',v:6500},
-  {n:'Ролики K2',e:'🛼',c:'Спорт',v:11000},{n:'Гребной тренажёр',e:'🚣',c:'Спорт',v:35000},
+  // ===== ТЕХНИКА (45) =====
+  ['Кабель USB-C','🔌',T,900],['Зарядка Apple','🔌',T,1800],['Флешка 64GB','💾',T,1200],['Мышь Logitech','🖱️',T,1500],
+  ['Клавиатура проводная','⌨️',T,2000],['Коврик для мыши','🖱️',T,600],['Веб-камера Logitech','📷',T,3500],['Микрофон USB','🎤',T,4500],
+  ['Колонка JBL','🔊',T,3800],['Наушники проводные','🎧',T,1500],['TWS-наушники','🎧',T,5000],['Фитнес-браслет','⌚',T,2800],
+  ['Умные часы','⌚',T,15000],['AirPods Pro 2','🎧',T,18000],['Sony WH-1000XM5','🎧',T,24000],['Фотоаппарат Canon','📷',T,40000],
+  ['Смартфон бюджетный','📱',T,12000],['Смартфон средний','📱',T,28000],['Смартфон флагман','📱',T,85000],
+  ['iPhone 14 Pro','📱',T,75000],['iPhone 15 Pro Max','📱',T,130000],['Samsung Galaxy S23','📱',T,50000],
+  ['Xiaomi 13T Pro','📱',T,32000],['Планшет Samsung','📲',T,25000],['iPad Air 5','📲',T,38000],['iPad Pro 11"','📲',T,60000],
+  ['Ноутбук бюджетный','💻',T,35000],['Ноутбук игровой','💻',T,85000],['MacBook Air M2','💻',T,95000],['MacBook Pro 14 M3','💻',T,165000],
+  ['Монитор 24"','🖥️',T,18000],['Монитор 27" 4K','🖥️',T,38000],['Принтер лазерный','🖨️',T,15000],['Сканер','🖨️',T,8000],
+  ['Роутер ASUS','📡',T,7000],['PlayStation 5','🎮',T,42000],['Xbox Series X','🕹️',T,40000],['Nintendo Switch','🎮',T,27000],
+  ['GoPro Hero 11','📹',T,32000],['Экшн-камера DJI','📹',T,28000],['Дрон DJI Mini 3','🛸',T,44000],['Дрон DJI Air 3','🛸',T,95000],
+  ['Проектор Epson','📽️',T,37000],['Телевизор 43"','📺',T,28000],['Телевизор LG OLED','📺',T,88000],['Саундбар JBL','🔊',T,25000],
+  ['Kindle Paperwhite','📖',T,13000],['Электросамокат Kugoo','🛴',T,21000],
+
+  // ===== МЕБЕЛЬ (30) =====
+  ['Табуретка','🪑',M,900],['Полка настенная','📚',M,1500],['Вешалка','🧥',M,1200],['Пуф','🪑',M,3500],
+  ['Стол журнальный','🪵',M,5000],['Стол письменный','🪵',M,12000],['Стол обеденный','🪵',M,18000],['Стол дубовый','🪵',M,32000],
+  ['Стол антикварный','🪵',M,180000],['Кресло-мешок','🪑',M,4000],['Кресло офисное','🪑',M,15000],['Кресло Eames','🪑',M,26000],
+  ['Кресло-качалка','🪑',M,20000],['Диван 2-местный','🛋️',M,22000],['Диван-кровать IKEA','🛋️',M,28000],['Диван угловой','🛋️',M,45000],
+  ['Диван кожаный премиум','🛋️',M,180000],['Кровать односпальная','🛏️',M,15000],['Кровать двуспальная','🛏️',M,22000],
+  ['Кровать с подъёмником','🛏️',M,35000],['Кровать премиум','🛏️',M,150000],['Комод ИКЕА','🗄️',M,7500],
+  ['Комод ретро','🗄️',M,14000],['Шкаф-пенал','🚪',M,14000],['Шкаф-купе 3-дверный','🚪',M,23000],
+  ['Шкаф-гардеробная','🚪',M,85000],['Стеллаж открытый','📚',M,11000],['Зеркало в раме','🪞',M,8500],
+  ['Тумба под ТВ','📺',M,9000],['Барный стул','🪑',M,5500],
+
+  // ===== АВТО (25) =====
+  ['Прицеп легковой','🚛',A,85000],['Мопед Alpha','🛵',A,45000],['Скутер Honda','🛵',A,95000],
+  ['Yamaha YZF-R3','🏍️',A,420000],['Kawasaki Ninja 300','🏍️',A,350000],['Honda CB400','🏍️',A,380000],
+  ['Datsun on-DO (2018)','🚗',A,480000],['Lada Granta (2020)','🚙',A,550000],['Renault Logan (2019)','🚘',A,620000],
+  ['Lada Vesta (2019)','🚙',A,720000],['Kia Rio (2018)','🚘',A,640000],['Hyundai Solaris (2017)','🚘',A,620000],
+  ['VW Polo (2018)','🚘',A,680000],['Ford Focus (2017)','🚗',A,750000],['Skoda Octavia (2016)','🚗',A,850000],
+  ['Toyota Corolla (2015)','🚖',A,900000],['Kia Sportage (2019)','🚙',A,980000],['Hyundai Tucson (2020)','🚙',A,990000],
+  ['BMW 320i (2016)','🚗',A,990000],['Mercedes C-Class (2015)','🚗',A,980000],
+
+  // ===== РАЗНОЕ (35) =====
+  ['Брелок для ключей','🔑',R,300],['Ручка Parker','🖊️',R,800],['Зажигалка Zippo','🔥',R,1500],['Кружка керамическая','☕',R,400],
+  ['Термос','🍶',R,1200],['Фонарик LED','🔦',R,700],['Маска для сна','😴',R,300],['Скакалка','🏃',R,500],
+  ['Пазл 1000 деталей','🧩',R,700],['Игрушка плюшевая','🧸',R,600],['Настольная игра Catan','🎲',R,5000],
+  ['Книга «Мастер и Маргарита»','📖',R,14000],['Виниловая пластинка Beatles','💿',R,22000],['Коллекционная фигурка Funko','🧸',R,4500],
+  ['Сумка Michael Kors','👜',R,16000],['Рюкзак Samsonite','🎒',R,8000],['Очки Ray-Ban','🕶️',R,12000],
+  ['Nike Air Max','👟',R,9000],['Adidas Ultraboost','👟',R,11000],['Куртка The North Face','🧥',R,18000],
+  ['Кожаная куртка','🧥',R,24000],['Casio G-Shock','⌚',R,15000],['Apple Watch S9','⌚',R,32000],
+  ['Гитара Yamaha','🎸',R,15000],['Гитара Fender','🎸',R,28000],['Синтезатор Casio','🎹',R,22000],
+  ['Велосипед Stels','🚲',R,12000],['Велосипед Trek','🚲',R,34000],['Самокат трюковой','🛹',R,8000],
+  ['Фен Dyson Supersonic','💇',R,28000],['Эпилятор Braun','💅',R,11000],['Мультиварка Redmond','🍲',R,8500],
+  ['Набор ножей Wüsthof','🔪',R,16000],['Пылесос вертикальный','🧹',R,8000],['Кофемашина DeLonghi','☕',R,33000],
+
+  // ===== ИНСТРУМЕНТЫ (25) =====
+  ['Набор отвёрток','🪛',I,1200],['Набор ключей JTC','🔧',I,7800],['Молоток','🔨',I,900],
+  ['Рулетка','📏',I,500],['Уровень лазерный','📏',I,12000],['Болгарка Bosch','⚙️',I,8500],
+  ['Дрель Makita','🔩',I,12000],['Шуруповёрт DeWalt','🔧',I,14000],['Перфоратор Bosch','🔨',I,18000],
+  ['Лобзик Makita','🪚',I,9500],['Пила цепная Stihl','🪓',I,24000],['Сварочный аппарат','🔥',I,22000],
+  ['Компрессор воздушный','💨',I,16000],['Генератор бензиновый','⚡',I,28000],['Мотоблок','🚜',I,32000],
+  ['Газонокосилка','⛏️',I,18000],['Культиватор ручной','🌱',I,9000],['Пылесос строительный','🧹',I,9500],
+  ['Набор свёрл','🪛',I,2500],['УШМ Makita','⚙️',I,11000],['Краскопульт','🎨',I,6500],
+  ['Тепловая пушка','🔥',I,7000],['Парогенератор','💨',I,14000],['Станок токарный','⚙️',I,85000],['Станок сверлильный','🔩',I,24000],
+
+  // ===== СПОРТ (20) =====
+  ['Коврик для йоги','🧘',S,1500],['Скакалка спортивная','🏃',S,600],['Мяч футбольный','⚽',S,1200],['Мяч баскетбольный','🏀',S,1400],
+  ['Гантели разборные','🏋️',S,14000],['Гантели 5 кг','🏋️',S,3500],['Штанга с блинами','🏋️',S,32000],
+  ['Скамья для жима','🏋️',S,18000],['Турник настенный','🏋️',S,4500],['Брусья настенные','🏋️',S,5500],
+  ['Боксёрская груша','🥊',S,12000],['Перчатки боксёрские','🥊',S,6500],['Беговая дорожка','🏃',S,45000],
+  ['Велотренажёр','🚴',S,28000],['Гребной тренажёр','🚣',S,35000],['Эллиптический тренажёр','🏃',S,38000],
+  ['Лыжи горные','⛷️',S,24000],['Сноуборд','🏂',S,32000],['Скейтборд','🛹',S,6500],['Ролики K2','🛼',S,11000],
 ];
 
 const VARIANTS = [
-  {p:'новый',m:1.20},{p:'как новый',m:1.05},{p:'б/у',m:0.70},{p:'отличное состояние',m:0.95},
+  {p:'новый',m:1.20},{p:'как новый',m:1.05},{p:'б/у',m:0.70},{p:'отличное',m:0.95},
   {p:'идеальный',m:1.05},{p:'ретро',m:0.85},{p:'винтаж',m:1.35},{p:'люкс',m:1.55},
   {p:'премиум',m:1.40},{p:'профессиональный',m:1.30},{p:'спортивный',m:1.15},{p:'домашний',m:0.90},
   {p:'офисный',m:0.95},{p:'детский',m:0.72},{p:'мини',m:0.60},{p:'макси',m:1.25},
@@ -364,28 +419,41 @@ const VARIANTS = [
   {p:'зимний',m:0.95},{p:'летний',m:0.90},{p:'тюнингованный',m:1.22},{p:'стандартный',m:1.00},
   {p:'limited edition',m:1.80},{p:'редкий',m:1.68},{p:'царапанный',m:0.45},{p:'чистый',m:1.02},
   {p:'фирменный',m:1.10},{p:'нераспакованный',m:1.30},{p:'тестовый',m:0.68},{p:'выставочный',m:0.82},
+  {p:'подписной',m:1.72},{p:'с историей',m:1.55},{p:'музейный',m:1.90},{p:'уценённый',m:0.55},
+  {p:'уникальный',m:1.85},{p:'прототип',m:1.95},{p:'восстановленный',m:0.88},{p:'из-за границы',m:1.28},
+  {p:'уценка',m:0.52},{p:'полный комплект',m:1.25},
 ];
 
 function buildCatalog() {
   const cat = [];
-  for (const b of BASES) for (const v of VARIANTS)
-    cat.push({n: b.n + ' (' + v.p + ')', e: b.e, c: b.c, v: Math.max(100, Math.round(b.v * v.m))});
+  for (const [n, e, c, v] of BASES) for (const vv of VARIANTS)
+    cat.push({ n: n + ' (' + vv.p + ')', e, c, v: Math.max(150, Math.round(v * vv.m)) });
   return cat;
 }
 const CATALOG = buildCatalog();
 const CATALOG_SIZE = CATALOG.length;
 
 /* ===== НПС ===== */
-const NPC_NAMES = ['Алексей','Марина','Виктор','Ольга','Дмитрий','Светлана','Игорь','Наталья','Роман','Юлия','Сергей','Екатерина','Павел','Елена','Артём','Ирина','Максим','Анна','Владимир','Татьяна','Михаил','Ксения','Андрей','Валентина','Николай','Дарья','Олег','Софья','Григорий','Алиса','Борис','Кристина'];
-const NPC_AVATARS = ['🧔','👨‍💼','👩','🧑','👨‍🦰','👩‍🦱','🧓','👨‍🔧','👩‍💼','🧑‍🎤','👨‍🍳','👩‍🔬','👨‍🌾','👩‍🎨','🧑‍💻','👩‍🏫','👨‍⚕️','👩‍⚕️','🧙','👨‍🎓','👩‍🎓','👴','👵','🧑‍🚀','👨‍✈️','👩‍🎤'];
+const NPC_NAMES = ['Алексей','Марина','Виктор','Ольга','Дмитрий','Светлана','Игорь','Наталья','Роман','Юлия','Сергей','Екатерина','Павел','Елена','Артём','Ирина','Максим','Анна','Владимир','Татьяна','Михаил','Ксения','Андрей','Валентина','Николай','Дарья','Олег','Софья','Григорий','Алиса'];
+const NPC_AVATARS = ['🧔','👨‍💼','👩','🧑','👨‍🦰','👩‍🦱','🧓','👨‍🔧','👩‍💼','🧑‍🎤','👨‍🍳','👩‍🔬','👨‍🌾','👩‍🎨','🧑‍💻','👩‍🏫','👨‍⚕️','👩‍⚕️','🧙','👨‍🎓','👩‍🎓','👴','👵','🧑‍🚀'];
+
 const NPC_TRAITS = [
-  {t:'Ушлый барыга',greed:1.12,patience:65,chatty:0.7},{t:'Добродушный дед',greed:0.72,patience:125,chatty:1.2},
-  {t:'Хитрый перекуп',greed:1.2,patience:55,chatty:0.8},{t:'Студент-безденежник',greed:0.82,patience:85,chatty:1.0},
-  {t:'Деловая женщина',greed:1.0,patience:95,chatty:0.9},{t:'Мастер на все руки',greed:0.8,patience:105,chatty:1.1},
-  {t:'Начинающий продавец',greed:0.9,patience:75,chatty:1.0},{t:'Модная блогерша',greed:1.15,patience:70,chatty:1.3},
-  {t:'Спешащий продавец',greed:0.85,patience:45,chatty:0.6},{t:'Оценщик со стажем',greed:1.05,patience:100,chatty:1.2},
-  {t:'Бабушка с рынка',greed:0.7,patience:130,chatty:1.4},{t:'Молодой папа',greed:0.95,patience:80,chatty:1.0},
+  {t:'Ушлый барыга',greed:1.12,patience:65,stubborn:0.6},
+  {t:'Добродушный дед',greed:0.72,patience:125,stubborn:0.15},
+  {t:'Хитрый перекуп',greed:1.20,patience:55,stubborn:0.85},
+  {t:'Студент-безденежник',greed:0.82,patience:85,stubborn:0.20},
+  {t:'Деловая женщина',greed:1.00,patience:95,stubborn:0.55},
+  {t:'Мастер на все руки',greed:0.80,patience:105,stubborn:0.25},
+  {t:'Начинающий продавец',greed:0.90,patience:75,stubborn:0.15},
+  {t:'Модная блогерша',greed:1.15,patience:70,stubborn:0.50},
+  {t:'Спешащий продавец',greed:0.85,patience:45,stubborn:0.20},
+  {t:'Оценщик со стажем',greed:1.05,patience:100,stubborn:0.90},
+  {t:'Бабушка с рынка',greed:0.70,patience:130,stubborn:0.30},
+  {t:'Молодой папа',greed:0.95,patience:80,stubborn:0.40},
+  {t:'Коллекционер',greed:1.30,patience:110,stubborn:0.95},
+  {t:'Нервный продавец',greed:1.00,patience:35,stubborn:0.70},
 ];
+
 const REASONS = {
   'Техника':['купил новую модель, эта лежит без дела','подарили, но я не пользуюсь','перешёл на другой бренд','брал для работы, больше не нужно'],
   'Мебель':['переезжаю в другую квартиру','купил(а) новую, эта не вписалась','наследство от бабушки','сделали ремонт и сменили стиль'],
@@ -394,32 +462,35 @@ const REASONS = {
   'Инструменты':['закончилась стройка','перешёл на другой бренд','осталось от отца','работаю с другим набором'],
   'Спорт':['не хватает времени','пересел(а) на другой вид спорта','купил(а) и забросил(а)','травма, не могу заниматься'],
 };
+
 const AVATARS = ['🧑‍💼','👨','👩','🧔','👨‍🦰','👩‍🦱','🧓','👨‍🔧','🦸','🤑','😎','👑','🎩','🐺','🦊','🐱','🤖','🐉'];
 
 /* ===== СОСТОЯНИЕ ===== */
-const SAVE_KEY = 'perekup_pro_save_v2';
-const SAVE_VERSION = 2;
+const SAVE_KEY = 'perekup_pro_save_v3';
+const SAVE_VERSION = 3;
 const START_MONEY = 10000;
 const MARKET_TARGET = 60;
 const PAGE_SIZE = 12;
 
 const state = {
-  player: { name: 'Новичок', avatar: '🧑‍💼', money: START_MONEY },
+  player: { name: 'Новичок', avatar: '🧑‍💼', avatarImage: null, money: START_MONEY },
   inventory: [], listings: [], market: [],
   gameMin: 0, tab: 'market', filter: 'Все',
   page: 1,
-  priceMin: 0, priceMax: 99999999,
-  pricePreset: 'all',
+  priceMin: 0, priceMax: 99999999, pricePreset: 'all',
+  theme: 'space',
   stats: { bought: 0, sold: 0, profit: 0 },
   uid: 1, lastSaveOk: false,
 };
 
+/* ===== СОХРАНЕНИЕ ===== */
 function saveGame() {
   try {
     localStorage.setItem(SAVE_KEY, JSON.stringify({
       v: SAVE_VERSION, ts: Date.now(),
       player: state.player, inventory: state.inventory, listings: state.listings,
       market: state.market, gameMin: state.gameMin, stats: state.stats, uid: state.uid,
+      theme: state.theme,
     }));
     state.lastSaveOk = true;
   } catch (e) { state.lastSaveOk = false; }
@@ -431,13 +502,15 @@ function loadGame() {
     if (!raw) return false;
     const d = JSON.parse(raw);
     if (d.v !== SAVE_VERSION) { localStorage.removeItem(SAVE_KEY); return false; }
-    state.player = d.player || { name: 'Новичок', avatar: '🧑‍💼', money: START_MONEY };
+    state.player = d.player || { name: 'Новичок', avatar: '🧑‍💼', avatarImage: null, money: START_MONEY };
+    if (state.player.avatarImage === undefined) state.player.avatarImage = null;
     state.inventory = d.inventory || [];
     state.listings = d.listings || [];
     state.market = d.market || [];
     state.stats = d.stats || { bought: 0, sold: 0, profit: 0 };
     state.uid = d.uid || 1;
     state.gameMin = d.gameMin || 0;
+    state.theme = d.theme || 'space';
     return true;
   } catch (e) { return false; }
 }
@@ -460,7 +533,7 @@ function genMarketItem(maxValue) {
     minPrice: Math.min(minPrice, Math.round(askPrice * 0.93)),
     npc: {
       name: pick(NPC_NAMES), avatar: pick(NPC_AVATARS), trait: trait.t,
-      greed: trait.greed, chatty: trait.chatty,
+      greed: trait.greed, stubborn: trait.stubborn,
       patience: trait.patience, maxPatience: trait.patience,
     },
   };
@@ -471,8 +544,8 @@ function refillMarket() {
   while (state.market.length < MARKET_TARGET) {
     const r = Math.random();
     let maxV;
-    if (r < 0.3) maxV = Math.max(2000, wealth * 0.8);
-    else if (r < 0.6) maxV = Math.max(15000, wealth * 2);
+    if (r < 0.30) maxV = Math.max(2000, wealth * 0.8);
+    else if (r < 0.60) maxV = Math.max(15000, wealth * 2);
     else if (r < 0.85) maxV = Math.max(50000, wealth * 5);
     else maxV = Math.max(200000, wealth * 15);
     state.market.push(genMarketItem(maxV));
@@ -502,8 +575,16 @@ function rankOf() {
   return 'Легенда перекупа';
 }
 
+function avatarHtml(size = 46, radius = 14, extra = '') {
+  const s = `width:${size}px;height:${size}px;border-radius:${radius}px;`;
+  if (state.player.avatarImage) {
+    return `<div class="mini-avatar" style="${s}${extra}"><img src="${state.player.avatarImage}" alt=""></div>`;
+  }
+  return `<div class="mini-avatar" style="${s}font-size:${Math.round(size*0.52)}px;${extra}">${state.player.avatar}</div>`;
+}
+
 function renderPlayerBar() {
-  $('#playerBar').innerHTML = `<div class="mini-avatar">${state.player.avatar}</div>
+  $('#playerBar').innerHTML = `${avatarHtml(46, 14)}
     <div><div class="mini-name">${esc(state.player.name)}</div>
     <div class="mini-money" id="moneyLabel">${fmt(state.player.money)}</div></div>`;
 }
@@ -519,7 +600,10 @@ function popMoney(amount, positive = true) {
 }
 
 function renderTabs() {
-  const tabs = [['market','🏷️ Рынок'],['inventory','📦 Склад'],['listings','📢 Мои объявления'],['profile','👤 Профиль']];
+  const tabs = [
+    ['market','🏷️ Рынок'],['inventory','📦 Склад'],['listings','📢 Объявления'],
+    ['profile','👤 Профиль'],['settings','⚙️ Настройки']
+  ];
   $('#tabs').innerHTML = tabs.map(([id, l]) =>
     `<button class="tab ${state.tab === id ? 'active' : ''}" onclick="setTab('${id}')">${l}</button>`
   ).join('');
@@ -536,11 +620,12 @@ function renderView() {
     case 'inventory': v.innerHTML = inventoryHTML(); break;
     case 'listings': v.innerHTML = listingsHTML(); break;
     case 'profile': v.innerHTML = profileHTML(); break;
+    case 'settings': v.innerHTML = settingsHTML(); break;
   }
   updateTimers();
 }
 
-/* ===== РЫНОК + ФИЛЬТР + ПАГИНАЦИЯ ===== */
+/* ===== РЫНОК ===== */
 function getFilteredMarket() {
   let items = state.market.filter(i => state.filter === 'Все' || i.cat === state.filter);
   items = items.filter(i => i.askPrice >= state.priceMin && i.askPrice <= state.priceMax);
@@ -575,19 +660,18 @@ function marketHTML() {
 
   const presets = [
     ['all','Все','0','99999999'],
-    ['cheap','до 10к','0','10000'],
-    ['mid','10–50к','10000','50000'],
-    ['high','50–200к','50000','200000'],
-    ['premium','200к+','200000','99999999'],
+    ['cheap','до 5к','0','5000'],
+    ['mid','5–30к','5000','30000'],
+    ['high','30–150к','30000','150000'],
+    ['premium','150к+','150000','99999999'],
   ];
-
-  const presetHtml = presets.map(([key, label, mn, mx]) =>
-    `<button class="pf-preset ${state.pricePreset === key ? 'active' : ''}" onclick="setPricePreset('${key}',${mn},${mx})">${label}</button>`
+  const presetHtml = presets.map(([k, l, mn, mx]) =>
+    `<button class="pf-preset ${state.pricePreset === k ? 'active' : ''}" onclick="setPricePreset('${k}',${mn},${mx})">${l}</button>`
   ).join('');
 
   const gridHtml = pageItems.length
     ? `<div class="grid">${cards}</div>`
-    : `<div class="empty"><div class="empty-ico">🔍</div><b>Ничего не найдено</b>Попробуй изменить фильтры или диапазон цен</div>`;
+    : `<div class="empty"><div class="empty-ico">🔍</div><b>Ничего не найдено</b>Попробуй изменить фильтры</div>`;
 
   const paginationHtml = total > 0 ? `
     <div class="pagination">
@@ -601,7 +685,7 @@ function marketHTML() {
 
   return `
     <div class="section-head">
-      <div class="section-title">Рынок <span class="cat-badge">📚 ${CATALOG_SIZE} товаров</span></div>
+      <div class="section-title">Рынок <span class="cat-badge">📚 ${CATALOG_SIZE.toLocaleString('ru-RU')} товаров</span></div>
       <div class="filters">
         ${cats.map(c => `<button class="chip ${state.filter === c ? 'active' : ''}" onclick="setFilter('${c}')">${c}</button>`).join('')}
       </div>
@@ -609,9 +693,9 @@ function marketHTML() {
     <div class="price-filter">
       <span class="pf-label">Цена</span>
       <div class="pf-inputs">
-        <input type="number" id="priceMinInput" value="${state.priceMin === 0 ? '' : state.priceMin}" placeholder="от" min="0" step="1000" oninput="onPriceMinInput(this.value)">
+        <input type="number" id="priceMinInput" value="${state.priceMin === 0 ? '' : state.priceMin}" placeholder="от" min="0" step="100" oninput="onPriceMinInput(this.value)">
         <span class="pf-dash">—</span>
-        <input type="number" id="priceMaxInput" value="${state.priceMax >= 99999999 ? '' : state.priceMax}" placeholder="до" min="0" step="1000" oninput="onPriceMaxInput(this.value)">
+        <input type="number" id="priceMaxInput" value="${state.priceMax >= 99999999 ? '' : state.priceMax}" placeholder="до" min="0" step="100" oninput="onPriceMaxInput(this.value)">
       </div>
       <div class="pf-presets">${presetHtml}</div>
       <button class="pf-reset" onclick="resetPriceFilter()">✕ Сброс</button>
@@ -648,37 +732,20 @@ function setFilter(c) { state.filter = c; state.page = 1; renderView(); }
 let priceDebounce = null;
 function onPriceMinInput(v) {
   state.priceMin = Math.max(0, +v || 0);
-  state.pricePreset = 'custom';
-  state.page = 1;
+  state.pricePreset = 'custom'; state.page = 1;
   if (state.priceMax < state.priceMin) { state.priceMax = state.priceMin; const mx = document.getElementById('priceMaxInput'); if (mx) mx.value = state.priceMax; }
   clearTimeout(priceDebounce);
   priceDebounce = setTimeout(() => { renderView(); if ($('#priceMinInput')) $('#priceMinInput').focus(); }, 350);
 }
-
 function onPriceMaxInput(v) {
   state.priceMax = v === '' ? 99999999 : Math.max(0, +v || 0);
-  state.pricePreset = 'custom';
-  state.page = 1;
+  state.pricePreset = 'custom'; state.page = 1;
   if (state.priceMax < state.priceMin) { state.priceMin = 0; const mn = document.getElementById('priceMinInput'); if (mn) mn.value = ''; }
   clearTimeout(priceDebounce);
   priceDebounce = setTimeout(() => { renderView(); if ($('#priceMaxInput')) $('#priceMaxInput').focus(); }, 350);
 }
-
-function setPricePreset(key, mn, mx) {
-  state.pricePreset = key;
-  state.priceMin = mn;
-  state.priceMax = mx;
-  state.page = 1;
-  renderView();
-}
-
-function resetPriceFilter() {
-  state.pricePreset = 'all';
-  state.priceMin = 0;
-  state.priceMax = 99999999;
-  state.page = 1;
-  renderView();
-}
+function setPricePreset(k, mn, mx) { state.pricePreset = k; state.priceMin = mn; state.priceMax = mx; state.page = 1; renderView(); }
+function resetPriceFilter() { state.pricePreset = 'all'; state.priceMin = 0; state.priceMax = 99999999; state.page = 1; renderView(); }
 
 function buyNow(uid) {
   const it = state.market.find(i => i.uid === uid);
@@ -687,8 +754,7 @@ function buyNow(uid) {
   state.player.money -= it.askPrice;
   addToInventory(it, it.askPrice);
   state.market = state.market.filter(i => i.uid !== uid);
-  refillMarket();
-  state.stats.bought++;
+  refillMarket(); state.stats.bought++;
   toast('📦 Куплено', `${it.name} за ${fmt(it.askPrice)}`);
   renderView(); popMoney(it.askPrice, false); saveGame();
 }
@@ -761,11 +827,12 @@ function cancelListing(uid) {
   renderView(); saveGame();
 }
 
+/* ===== ПРОФИЛЬ ===== */
 function profileHTML() {
   return `<div class="section-head"><div class="section-title">Профиль</div></div>
   <div class="profile-grid">
     <div class="profile-card">
-      <div class="big-avatar">${state.player.avatar}</div>
+      <div class="big-avatar">${state.player.avatarImage ? `<img src="${state.player.avatarImage}" alt="">` : state.player.avatar}</div>
       <div class="profile-name">${esc(state.player.name)}</div>
       <div class="profile-rank">${rankOf()}</div>
       <div class="stats">
@@ -780,8 +847,8 @@ function profileHTML() {
         <input id="nickInput" maxlength="16" value="${esc(state.player.name)}" placeholder="Введи ник..."></div>
       <button class="btn btn-gold" style="width:100%" onclick="saveNick()">💾 Сохранить ник</button>
       <div style="margin-top:22px">
-        <label style="display:block;font-size:12px;font-weight:800;color:var(--muted);margin-bottom:7px;letter-spacing:.5px;text-transform:uppercase">Аватар</label>
-        <div class="avatar-grid">${AVATARS.map(a => `<div class="av-opt ${state.player.avatar === a ? 'sel' : ''}" onclick="setAvatar('${a}')">${a}</div>`).join('')}</div>
+        <label style="display:block;font-size:12px;font-weight:800;color:var(--muted);margin-bottom:7px;letter-spacing:.5px;text-transform:uppercase">Аватар emoji</label>
+        <div class="avatar-grid">${AVATARS.map(a => `<div class="av-opt ${state.player.avatar === a && !state.player.avatarImage ? 'sel' : ''}" onclick="setAvatar('${a}')">${a}</div>`).join('')}</div>
       </div>
       <button class="btn btn-red" style="width:100%;margin-top:22px" onclick="resetGame()">🔄 Начать заново</button>
     </div>
@@ -795,20 +862,122 @@ function saveNick() {
   renderPlayerBar(); renderView(); saveGame();
   toast('✅ Ник изменён', 'Теперь ты ' + state.player.name);
 }
-function setAvatar(a) { state.player.avatar = a; renderPlayerBar(); renderView(); saveGame(); }
 
+function setAvatar(a) {
+  state.player.avatar = a;
+  state.player.avatarImage = null;
+  renderPlayerBar(); renderView(); saveGame();
+}
+
+/* ===== НАСТРОЙКИ ===== */
+function settingsHTML() {
+  const themesHtml = Object.entries(THEMES).map(([k, t]) => `
+    <button class="theme-card ${state.theme === k ? 'active' : ''}" onclick="setTheme('${k}')" style="--tp1:${t.b1};--tp2:${t.b2};--tp-bg:${t.bg}">
+      <div class="theme-check">✓</div>
+      <div class="theme-preview"></div>
+      <div class="theme-name">${t.name}</div>
+    </button>`).join('');
+
+  const avatarPreview = state.player.avatarImage
+    ? `<img src="${state.player.avatarImage}" alt="">`
+    : (state.player.avatar || '🧑‍💼');
+
+  return `<div class="section-head"><div class="section-title">⚙️ Настройки</div></div>
+  <div class="settings-grid">
+    <div class="settings-card">
+      <h3>🎨 Фон игры</h3>
+      <div class="themes-grid">${themesHtml}</div>
+    </div>
+
+    <div class="settings-card">
+      <h3>🖼️ Своя аватарка</h3>
+      <div class="avatar-upload">
+        <div class="upload-preview">${avatarPreview}</div>
+        <div class="upload-actions">
+          <input type="file" id="avatarFile" class="upload-input" accept="image/*" onchange="uploadAvatar(event)">
+          <button class="btn btn-gold" onclick="document.getElementById('avatarFile').click()">📤 Загрузить фото</button>
+          ${state.player.avatarImage ? `<button class="btn btn-red" onclick="removeAvatarImage()">❌ Удалить фото</button>` : ''}
+          <div class="hint">Загрузите любое фото — оно автоматически сожмётся и сохранится. JPG, PNG, до 5MB.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="settings-card">
+      <h3>💾 Данные</h3>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <button class="btn btn-ghost" onclick="saveGame();toast('💾 Сохранено','Прогресс сохранён в localStorage')">💾 Сохранить сейчас</button>
+        <button class="btn btn-red" onclick="resetGame()">🗑️ Удалить сохранение и начать заново</button>
+      </div>
+      <div class="hint" style="margin-top:12px">Автосохранение работает каждые 5 секунд и при закрытии игры. Сохраняется: баланс, склад, объявления, профиль, аватар, тема.</div>
+    </div>
+  </div>`;
+}
+
+function setTheme(k) {
+  state.theme = k;
+  applyTheme(k);
+  renderView(); saveGame();
+  toast('🎨 Тема изменена', THEMES[k].name);
+}
+
+/* ===== ЗАГРУЗКА АВАТАРКИ ===== */
+function uploadAvatar(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  if (file.size > 5 * 1024 * 1024) return toast('⚠️ Файл слишком большой', 'Максимум 5MB');
+  if (!file.type.startsWith('image/')) return toast('⚠️ Не картинка', 'Выберите изображение');
+  const reader = new FileReader();
+  reader.onload = async (e) => {
+    try {
+      const compressed = await compressImage(e.target.result, 160, 0.82);
+      state.player.avatarImage = compressed;
+      renderPlayerBar(); renderView(); saveGame();
+      toast('✅ Аватарка загружена', 'Сохранено автоматически');
+    } catch (err) {
+      toast('⚠️ Ошибка', 'Не удалось обработать изображение');
+    }
+  };
+  reader.readAsDataURL(file);
+}
+
+function compressImage(dataUrl, maxSize, quality) {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.onload = () => {
+      try {
+        const canvas = document.createElement('canvas');
+        const scale = Math.min(maxSize / img.width, maxSize / img.height, 1);
+        canvas.width = Math.round(img.width * scale);
+        canvas.height = Math.round(img.height * scale);
+        canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height);
+        resolve(canvas.toDataURL('image/jpeg', quality));
+      } catch (e) { reject(e); }
+    };
+    img.onerror = reject;
+    img.src = dataUrl;
+  });
+}
+
+function removeAvatarImage() {
+  state.player.avatarImage = null;
+  renderPlayerBar(); renderView(); saveGame();
+  toast('🗑️ Фото удалено', 'Вернулся emoji-аватар');
+}
+
+/* ===== СБРОС ===== */
 function resetGame() {
-  if (!confirm('Начать заново? Прогресс и сохранение будут удалены.')) return;
+  if (!confirm('Начать заново? Весь прогресс и сохранение будут удалены.')) return;
   clearSave(); newGame(); renderView();
   toast('🔄 Новая игра', 'Стартовый капитал ' + fmt(START_MONEY));
 }
 
 function newGame() {
-  state.player = { name: 'Новичок', avatar: '🧑‍💼', money: START_MONEY };
+  state.player = { name: 'Новичок', avatar: '🧑‍💼', avatarImage: null, money: START_MONEY };
   state.inventory = []; state.listings = []; state.market = [];
   state.stats = { bought: 0, sold: 0, profit: 0 };
   state.uid = 1; state.gameMin = 0; state.page = 1;
   state.filter = 'Все'; state.priceMin = 0; state.priceMax = 99999999; state.pricePreset = 'all';
+  state.theme = 'space'; applyTheme('space');
   for (let i = 0; i < 3; i++) {
     const cheap = CATALOG.filter(c => c.v <= 5000);
     const b = pick(cheap);
@@ -861,20 +1030,26 @@ function extractNumber(text) {
 function detectIntents(text) {
   const t = text.toLowerCase();
   const r = [];
-  if (/(скидк|дешев|торг|уступ|сбав|сниз|подешев|перекуп)/.test(t)) r.push('ask_discount');
-  if (/(дорого|дороговат|слишком|перебор|обдирал|грабёж|грабеж)/.test(t)) r.push('too_expensive');
-  if (/(состоян|дефект|царап|б\/у|бу|провер|осмотр|работает|исправн)/.test(t)) r.push('ask_condition');
+  if (/(скидк|дешев|торг|уступ|сбав|сниз|подешев)/.test(t)) r.push('ask_discount');
+  if (/(дорого|дороговат|слишком|перебор|грабёж|грабеж|обдирал)/.test(t)) r.push('too_expensive');
+  if (/(состоян|дефект|царап|провер|осмотр|работает|исправн)/.test(t)) r.push('ask_condition');
   if (/(привет|здравств|добр|хай|салют|дороу)/.test(t)) r.push('greeting');
-  if (/(беру|забираю|согласен|договорил|по рукам|идёт|идет)/.test(t) && !/\d/.test(text)) r.push('accept');
+  if (/(беру|забираю|согласен|договорил|по рукам|идёт|идет|беру)/.test(t) && !/\d/.test(text)) r.push('accept');
   if (/(доставк|самовывоз|курьер|привез|привезти|отправ)/.test(t)) r.push('ask_delivery');
   if (/(срочн|сегодня|сейчас|быстр|побыстрей|заберу)/.test(t)) r.push('urgency');
-  if (/(пакет|несколько|оптом|вместе|оба|два|три)/.test(t)) r.push('bundle');
-  if (/(назови|скажи|какая|какую|сколько стоит|сколько хочешь|почём|почем|назовите)/.test(t)) r.push('ask_price');
+  if (/(назови|скажи|какая|какую|сколько стоит|почём|почем|назовите)/.test(t)) r.push('ask_price');
   if (/(спасибо|благодар|пожалуйста|извините)/.test(t)) r.push('polite');
   if (/(обман|кидал|развод|подвох|проверк|довер)/.test(t)) r.push('distrust');
   if (/(комплект|коробк|документ|чек|гарантийн|упаковк)/.test(t)) r.push('ask_accessories');
-  if (/(причин|почему прода|зачем прода|с чего)/.test(t)) r.push('ask_reason');
+  if (/(причин|почему прода|зачем прода)/.test(t)) r.push('ask_reason');
   if (/(как давно|когда куп|сколько польз)/.test(t)) r.push('ask_age');
+  if (/(торг уместен|поторг|возможен торг|подвинут|уступ)/.test(t)) r.push('ask_negotiable');
+  if (/(фото|фотк|покажи|скинь фото)/.test(t)) r.push('ask_photos');
+  if (/(трейд|обмен|поменя|в зачёт|зачет)/.test(t)) r.push('ask_trade');
+  if (/(где|адрес|встрет|метро|район)/.test(t)) r.push('ask_location');
+  if (/(карт|нал|перевод|сбп|оплат)/.test(t)) r.push('ask_payment');
+  if (/(круто|класс|отличн|хорош|нрав|прекрасн|мило)/.test(t)) r.push('complement');
+  if (/(дурак|тупой|идиот|лох|развод|обманщик)/.test(t)) r.push('insult');
   return r;
 }
 
@@ -884,7 +1059,11 @@ let tradeChat = null;
 function openTrade(uid) {
   const item = state.market.find(i => i.uid === uid);
   if (!item) return;
-  tradeChat = { item, messages: [], done: false, turns: 0, lastOffer: null, repeats: 0, discussed: new Set() };
+  tradeChat = {
+    item, messages: [], done: false, typing: false, turns: 0,
+    lastOffer: null, repeats: 0, discussed: new Set(),
+    playerOffers: [], refusals: 0, lowballsCount: 0, mood: 'neutral'
+  };
   const it = item;
   npcSay(pick([
     `Здравствуйте! Продаю ${it.name} за ${fmt(it.askPrice)}. Торг уместен.`,
@@ -911,7 +1090,7 @@ function renderTradeModal() {
     <div class="trade-item">
       <div class="ti-emoji">${it.emoji}</div>
       <div><div class="ti-name">${esc(it.name)}</div>
-        <div class="ti-price">Запрос продавца: ${fmt(it.askPrice)}</div></div>
+        <div class="ti-price">Запрос: ${fmt(it.askPrice)}</div></div>
     </div>
     <div class="chat" id="chatBox"></div>
     <div class="chat-quick" id="quickBtns"></div>
@@ -928,11 +1107,20 @@ function renderChatBox() {
   const box = $('#chatBox');
   if (!box) return;
   const av = tradeChat.item.npc.avatar;
-  box.innerHTML = tradeChat.messages.map(m => {
+  let html = tradeChat.messages.map(m => {
     if (m.who === 'sys') return `<div class="msg-sys ${m.cls || ''}">${m.text}</div>`;
-    if (m.who === 'me') return `<div class="msg me"><div class="msg-av">${state.player.avatar}</div><div class="msg-bubble">${m.text}</div></div>`;
+    if (m.who === 'me') {
+      const avHtml = state.player.avatarImage
+        ? `<div class="msg-av"><img src="${state.player.avatarImage}" alt=""></div>`
+        : `<div class="msg-av">${state.player.avatar}</div>`;
+      return `<div class="msg me">${avHtml}<div class="msg-bubble">${m.text}</div></div>`;
+    }
     return `<div class="msg npc"><div class="msg-av">${av}</div><div class="msg-bubble">${m.text}</div></div>`;
   }).join('');
+  if (tradeChat.typing) {
+    html += `<div class="msg npc"><div class="msg-av">${av}</div><div class="typing-bubble"><span class="typing-dot"></span><span class="typing-dot"></span><span class="typing-dot"></span></div></div>`;
+  }
+  box.innerHTML = html;
   box.scrollTop = box.scrollHeight;
 }
 
@@ -940,6 +1128,7 @@ function renderQuickBtns() {
   const box = $('#quickBtns');
   if (!box) return;
   if (tradeChat.done) { box.innerHTML = ''; return; }
+  box.classList.toggle('locked', tradeChat.typing);
   const it = tradeChat.item;
   const b1 = round100(it.askPrice * 0.85);
   const b2 = round100(it.askPrice * 0.72);
@@ -949,121 +1138,377 @@ function renderQuickBtns() {
     <button class="qbtn" onclick="quickOffer(${it.askPrice})">Беру за ${fmt(it.askPrice)}</button>
     <button class="qbtn" onclick="quickText('А скидку сделаете?')">«Скидку?»</button>
     <button class="qbtn" onclick="quickText('Расскажите о состоянии')">«Состояние?»</button>
-    <button class="qbtn" onclick="quickText('Почему продаёте?')">«Причина продажи?»</button>`;
+    <button class="qbtn" onclick="quickText('Почему продаёте?')">«Причина?»</button>
+    <button class="qbtn" onclick="quickText('Как с оплатой?')">«Оплата?»</button>`;
+}
+
+function lockChat() {
+  tradeChat.typing = true;
+  renderChatBox(); renderQuickBtns();
+  const f = $('#chatField'); if (f) f.disabled = true;
+  const b = $('.chat-input .btn'); if (b) b.disabled = true;
+}
+
+function unlockChat() {
+  if (!tradeChat) return;
+  tradeChat.typing = false;
+  renderChatBox(); renderQuickBtns();
+  const f = $('#chatField'); if (f) { f.disabled = false; f.focus(); }
+  const b = $('.chat-input .btn'); if (b) b.disabled = false;
 }
 
 function quickOffer(n) {
+  if (!tradeChat || tradeChat.done || tradeChat.typing) return;
   const f = $('#chatField'); if (f) f.value = '';
   meSay('Предлагаю ' + fmt(n));
-  handleTradeOffer(n, []);
+  renderChatBox();
+  processTradeInput(n, ['offer']);
 }
-function quickText(t) { meSay(t); handleTradeMessage(t); }
+
+function quickText(t) {
+  if (!tradeChat || tradeChat.done || tradeChat.typing) return;
+  meSay(t);
+  renderChatBox();
+  processTradeInput(null, null, t);
+}
 
 function sendTradeMsg() {
   const f = $('#chatField');
-  if (!f) return;
+  if (!f || !tradeChat || tradeChat.done || tradeChat.typing) return;
   const text = f.value.trim();
   if (!text) return;
   f.value = '';
   meSay(esc(text));
-  handleTradeMessage(text);
+  renderChatBox();
+  const offer = extractNumber(text);
+  processTradeInput(offer, null, text);
 }
 
-function handleTradeMessage(text) {
-  const it = tradeChat.item, tc = tradeChat;
-  const intents = detectIntents(text);
-  const offer = extractNumber(text);
+/* ===== ОБРАБОТКА СООБЩЕНИЯ С АНИМАЦИЕЙ ===== */
+async function processTradeInput(offer, _tags, text) {
+  const tc = tradeChat;
+  if (!tc || tc.done) return;
+  lockChat();
+
+  await sleep(rnd(3000, 6000));
+  if (!tradeChat || tradeChat !== tc) return;
+
+  const it = tc.item;
+  const intents = text ? detectIntents(text) : ['offer'];
   tc.turns++;
   intents.forEach(i => tc.discussed.add(i));
-  if (intents.includes('polite')) it.npc.patience = Math.min(it.npc.maxPatience, it.npc.patience + 4);
-  if (offer !== null) {
+
+  if (intents.includes('polite')) it.npc.patience = Math.min(it.npc.maxPatience, it.npc.patience + 3);
+  if (intents.includes('complement')) {
+    it.npc.patience = Math.min(it.npc.maxPatience, it.npc.patience + 8);
+    tc.mood = 'happy';
+  }
+  if (intents.includes('insult')) {
+    it.npc.patience -= 30;
+    tc.mood = 'angry';
+  }
+
+  // Проверка на оскорбление — NPC уходит
+  if (intents.includes('insult') && it.npc.patience <= 0) {
+    return npcLeaves();
+  }
+
+  if (offer !== null && offer > 0) {
     if (tc.lastOffer === offer) tc.repeats++; else tc.repeats = 0;
     tc.lastOffer = offer;
-    return handleTradeOffer(offer, intents);
+    tc.playerOffers.push(offer);
+    return handleOffer(offer, intents);
   }
-  if (intents.includes('greeting') && tc.turns <= 2) {
-    npcSay(pick([`Здравствуйте! Да, ${it.name} ещё в продаже. Слушаю вас.`, `Привет-привет! Ну что, берёте ${it.name}?`, `Добрый день. Да, всё актуально. Что интересует?`]));
+
+  // Текстовые интенты
+  const responses = [];
+  const t = (text || '').toLowerCase();
+
+  if (intents.includes('ask_discount') || intents.includes('too_expensive')) {
+    it.npc.patience -= 7;
+    tc.lowballsCount++;
+    if (it.npc.stubborn > 0.65) {
+      responses.push(pick([
+        `Скидку? ${it.name} и так по хорошей цене. ${fmt(it.askPrice)} — и никаких скидок.`,
+        `Слушай, я не из тех, кто просто так уступает. ${fmt(it.askPrice)} — вот моё слово.`,
+        `Давай без этого. Моя цена — ${fmt(it.askPrice)}. Нравится — бери.`
+      ]));
+    } else if (tc.discussed.has('_d')) {
+      responses.push('Я уже говорил про скидку. Назови свою цену, и обсудим.');
+    } else {
+      tc.discussed.add('_d');
+      const np = round100(it.askPrice * rnd(0.88, 0.95));
+      it.askPrice = Math.min(it.askPrice, np);
+      responses.push(pick([
+        `Ладно, скину немного — ${fmt(np)}. Но это предел.`,
+        `Хорошо, ${fmt(np)}. Дешевле — только если заберёшь всё сразу.`,
+        `Уговорил. ${fmt(np)} — окончательная.`
+      ]));
+    }
   } else if (intents.includes('ask_condition')) {
-    if (tc.discussed.has('_c')) npcSay('Я же уже говорил — состояние нормальное. Ты по цене что скажешь?');
-    else { tc.discussed.add('_c'); it.npc.patience -= 2; npcSay(pick([`Состояние честное — ${it.name} полностью рабочий, есть мелкие следы использования.`, `Всё в порядке, никаких дефектов. Можешь проверить лично.`, `Работает как часы. Пара царапин, но на функционал не влияет.`, `Состояние хорошее. Если хочешь — можем встретиться.`])); }
+    it.npc.patience -= 2;
+    if (tc.discussed.has('_c')) responses.push('Я уже говорил про состояние. По цене что скажешь?');
+    else {
+      tc.discussed.add('_c');
+      responses.push(pick([
+        `Состояние честное — ${it.name} полностью рабочий.`,
+        `Всё в порядке, никаких дефектов. Можешь проверить лично.`,
+        `Работает отлично. Пара мелких царапин — на функционал не влияет.`,
+      ]));
+    }
   } else if (intents.includes('ask_accessories')) {
-    if (tc.discussed.has('_a')) npcSay('Уже отвечал по комплекту. Всё, что было, отдаю.');
-    else { tc.discussed.add('_a'); it.npc.patience -= 2; npcSay(pick([`Комплект полный — коробка, документы, всё на месте.`, `Коробки нет, но чек и все причиндалы отдам.`, `Всё, что на фото, всё ваше.`])); }
+    it.npc.patience -= 2;
+    tc.discussed.add('_a');
+    responses.push(pick([
+      `Комплект полный — коробка, документы, всё на месте.`,
+      `Коробки нет, но чек и все причиндалы отдам.`,
+      `Всё, что на фото, всё ваше.`,
+    ]));
   } else if (intents.includes('ask_reason')) {
-    tc.discussed.add('_r'); npcSay(pick([`Да просто — ${pick(REASONS[it.cat])}. Решил продать, пока не поздно.`, `Причина простая: ${pick(REASONS[it.cat])}.`]));
+    responses.push(pick([
+      `Да просто — ${pick(REASONS[it.cat])}.`,
+      `Причина простая: ${pick(REASONS[it.cat])}.`,
+      `${pick(REASONS[it.cat]).replace(/^./, s=>s.toUpperCase())}. Вот и всё.`,
+    ]));
   } else if (intents.includes('ask_delivery')) {
-    it.npc.patience -= 3; npcSay(pick([`Самовывоз, конечно. Могу встретиться в центре.`, `Давай самовывозом. Мне так спокойнее.`, `Только самовывоз. Доставка — это уже твои заботы.`]));
+    it.npc.patience -= 3;
+    responses.push(pick([
+      `Самовывоз. Могу встретиться в центре.`,
+      `Давай самовывозом. Мне так спокойнее.`,
+      `Только самовывоз. Доставка — твои заботы.`,
+    ]));
+  } else if (intents.includes('ask_payment')) {
+    responses.push(pick([
+      `Наличными. Никаких переводов.`,
+      `СБП или наличные — как удобно.`,
+      `Перевод на карту подойдёт.`,
+    ]));
+  } else if (intents.includes('ask_location')) {
+    responses.push(pick([
+      `Могу встретиться у метро в центре.`,
+      `Самовывоз, адрес скину в личку.`,
+      `Давай на нейтральной территории — ТЦ рядом.`,
+    ]));
+  } else if (intents.includes('ask_trade')) {
+    it.npc.patience -= 5;
+    responses.push(pick([
+      `Трейд? Не, мне нужны деньги. Только продажа.`,
+      `Обмен не интересует. За наличные — да.`,
+      `Не, давай без обмена.`,
+    ]));
+  } else if (intents.includes('ask_photos')) {
+    responses.push(pick([
+      `Фото выше выложил, всё видно. Если что — ещё скину.`,
+      `Все фото в объявлении. Что не видно — спрашивай.`,
+      `Фотки все есть в объявлении. Могу ещё скинуть, если надо.`,
+    ]));
   } else if (intents.includes('ask_price')) {
-    it.npc.patience -= 2; npcSay(pick([`Прошу ${fmt(it.askPrice)}, но могу подвинуться для серьёзного покупателя.`, `${fmt(it.askPrice)} — вот моя цена. Что скажешь?`, `Изначально ${fmt(it.askPrice)}. Торг возможен.`]));
-  } else if (intents.includes('too_expensive')) {
-    it.npc.patience -= 6; npcSay(pick([`Дорого? Сравни с рынком — у меня ещё по-божески. Назови свою цену.`, `Так это же ${it.name}, не абы что. Сколько готов дать?`, `Могу немного скинуть, но не жди половину. Говори цифру.`]));
-  } else if (intents.includes('ask_discount')) {
-    it.npc.patience -= 8;
-    if (tc.discussed.has('_d')) npcSay('Ты уже просил скидку. Назови свою цену, и обсудим.');
-    else { tc.discussed.add('_d'); const np = round100(it.askPrice * rnd(0.88, 0.95)); it.askPrice = Math.min(it.askPrice, np); npcSay(pick([`Ладно, сделаю скидку — ${fmt(np)}. Но это предел.`, `Хорошо, скину. ${fmt(np)}, и расходимся.`, `Уговорил. ${fmt(np)} — окончательная.`])); }
+    it.npc.patience -= 2;
+    responses.push(pick([
+      `Прошу ${fmt(it.askPrice)}, но подвинусь для серьёзного покупателя.`,
+      `${fmt(it.askPrice)} — вот моя цена. Что скажешь?`,
+      `Изначально ${fmt(it.askPrice)}. Торг возможен.`,
+    ]));
+  } else if (intents.includes('ask_negotiable')) {
+    responses.push(pick([
+      `Торг есть, но не до бесплатного. Назови цифру.`,
+      `Можно подвинуться, если предложение адекватное.`,
+      `Всё обсуждаемо. Говори свою цену.`,
+    ]));
+  } else if (intents.includes('greeting')) {
+    responses.push(pick([
+      `Здравствуйте! Да, всё в силе. Слушаю.`,
+      `Привет-привет! Ну что, берёте?`,
+      `Добрый день. Да, актуально. Что интересует?`,
+    ]));
   } else if (intents.includes('distrust')) {
-    it.npc.patience -= 15; if (it.npc.patience <= 0) return npcLeaves();
-    npcSay(pick(['Слушай, я не мошенник. Не хочешь — не бери.', 'За кого ты меня принимаешь? Всё честно.', 'Если не доверяешь — просто не покупай.']));
-  } else if (intents.includes('accept')) {
-    if (it.askPrice <= state.player.money) return acceptSellerDeal(it.askPrice);
-    npcSay(`Рад, что согласен! Но у тебя же нет ${fmt(it.askPrice)}?`); it.npc.patience -= 5;
+    it.npc.patience -= 18;
+    tc.mood = 'angry';
+    responses.push(pick([
+      `Слушай, я не мошенник. Не хочешь — не бери.`,
+      `За кого ты меня принимаешь? Всё честно.`,
+      `Если не доверяешь — просто не покупай.`,
+    ]));
   } else if (intents.includes('urgency')) {
-    it.npc.patience -= 3; npcSay(pick(['Торопишься? Хорошо, тогда назови адекватную цену — и забирай.', 'Раз срочно — я тоже не хочу тянуть. Твоё предложение?', 'Если заберёшь сегодня — немного уступлю.']));
-  } else if (intents.includes('bundle')) {
-    npcSay('У меня только один экземпляр. Так что пакета не будет.');
+    it.npc.patience -= 3;
+    responses.push(pick([
+      `Торопишься? Назови адекватную цену — и забирай.`,
+      `Раз срочно — я тоже не хочу тянуть. Твоё предложение?`,
+      `Если заберёшь сегодня — немного уступлю.`,
+    ]));
   } else if (intents.includes('ask_age')) {
-    it.npc.patience -= 2; npcSay(pick([`Пользуюсь примерно ${Math.floor(rnd(1, 4))} года. Всё как новое.`, `Купил(а) относительно недавно, почти не использовал(а).`, `Брал(а) ещё в прошлом году. Всё работает.`]));
+    it.npc.patience -= 2;
+    responses.push(pick([
+      `Пользуюсь примерно ${Math.floor(rnd(1, 4))} года. Всё как новое.`,
+      `Купил(а) недавно, почти не использовал(а).`,
+      `Брал(а) ещё в прошлом году. Всё работает.`,
+    ]));
+  } else if (intents.includes('accept')) {
+    if (it.askPrice <= state.player.money) {
+      return acceptSellerDeal(it.askPrice);
+    }
+    responses.push(`Рад, что согласен! Но у тебя же ${fmt(state.player.money)}, а прошу ${fmt(it.askPrice)}.`);
+    it.npc.patience -= 5;
   } else {
-    it.npc.patience -= 5; npcSay(pick(['Так, давай ближе к делу. Сколько предлагаешь?', 'Не понял вопроса. По цене что скажешь?', 'Хорош болтать — называй сумму.', 'Ты мне зубы не заговаривай. Назови цену.']));
+    it.npc.patience -= 4;
+    responses.push(pick([
+      'Так, ближе к делу. Сколько предлагаешь?',
+      'Не понял. По цене что скажешь?',
+      'Хорош болтать — называй сумму.',
+      'Назови цену, и обсудим.',
+    ]));
   }
+
+  // Много сообщений? Отправляем по одному с задержкой
+  for (let i = 0; i < responses.length; i++) {
+    if (i > 0) {
+      tradeChat.typing = true;
+      renderChatBox(); renderQuickBtns();
+      await sleep(rnd(1500, 3000));
+      if (!tradeChat || tradeChat !== tc) return;
+      tradeChat.typing = false;
+    }
+    npcSay(responses[i]);
+    renderChatBox();
+  }
+
   if (it.npc.patience <= 0) return npcLeaves();
-  finishTurn();
+  unlockChat();
 }
 
-function handleTradeOffer(num, intents) {
-  const it = tradeChat.item, tc = tradeChat;
+function handleOffer(num, intents) {
+  const it = tradeChat.item;
+  const tc = tradeChat;
+
   if (num > state.player.money) {
-    npcSay(pick([`Слушай, у тебя же нет ${fmt(num)}. У тебя всего ${fmt(state.player.money)}.`, `Ты сначала деньги покажи, потом такую цену называй.`, `Хорошая шутка. Но у тебя нет столько.`]));
-    it.npc.patience -= 8; if (it.npc.patience <= 0) return npcLeaves();
-    return finishTurn();
+    npcSay(pick([
+      `Слушай, у тебя же нет ${fmt(num)}. У тебя всего ${fmt(state.player.money)}.`,
+      `Ты сначала деньги покажи, потом такую цену называй.`,
+      `Хорошая шутка. Но у тебя нет столько. Давай реальную сумму.`,
+    ]));
+    it.npc.patience -= 8;
+    if (it.npc.patience <= 0) return npcLeaves();
+    return unlockChat();
   }
-  if (num >= it.minPrice) return acceptSellerDeal(num);
+
+  // Упрямый NPC — не идёт ниже 95% от запроса
+  if (it.npc.stubborn > 0.7 && num < it.askPrice * 0.95) {
+    tc.refusals++;
+    if (tc.refusals >= 3 || it.npc.patience <= 25) {
+      npcSay(pick([
+        `Слушай, я не торгуюсь. ${fmt(it.askPrice)}, и точка. Не нравится — ищи дешевле.`,
+        `Я же сказал — цена финальная. Всё, разговор закончен.`,
+        `Всё, хватит. Не продам дешевле. Пока.`,
+      ]));
+      return npcLeaves();
+    }
+    it.npc.patience -= 15;
+    npcSay(pick([
+      `За ${fmt(num)}? Я же сказал — ${fmt(it.askPrice)}. Ни рублём меньше.`,
+      `${fmt(it.askPrice)}, и всё тут. Я не из тех, кто просто так уступает.`,
+      `Слушай, у меня цена железная — ${fmt(it.askPrice)}. Давай по-честному.`,
+    ]));
+    if (it.npc.patience <= 0) return npcLeaves();
+    return unlockChat();
+  }
+
+  // Принимаем если выше минимума
+  if (num >= it.minPrice) {
+    // Упрямый NPC может попросить чуть больше даже тут
+    if (it.npc.stubborn > 0.55 && num < it.askPrice * 0.92 && Math.random() < 0.45) {
+      const counter = round100(Math.min(it.askPrice, num * 1.06));
+      npcSay(pick([
+        `Почти. Добавь до ${fmt(counter)} — и по рукам.`,
+        `${fmt(num)} маловато. Давай ${fmt(counter)} и забирай.`,
+        `Ладно, ${fmt(counter)} — и расходимся.`,
+      ]));
+      tc.lastOffer = counter;
+      return unlockChat();
+    }
+    return acceptSellerDeal(num);
+  }
+
+  // Слишком низкая цена
+  tc.lowballsCount++;
+  if (num < it.minPrice * 0.55) {
+    it.npc.patience -= 30;
+    tc.mood = 'angry';
+    if (it.npc.patience <= 0 || tc.lowballsCount >= 3) {
+      npcSay(pick([
+        `Слушай, за ${fmt(num)} ты в магазин иди, там такое не продают. Всё, до свидания.`,
+        `Я не настолько глуп, чтобы за ${fmt(num)} отдать ${it.name}. Пока.`,
+        `Всё, хватит. С такими предложениями — не ко мне.`,
+      ]));
+      return npcLeaves();
+    }
+    const counter = round100(it.minPrice * rnd(1.05, 1.15));
+    npcSay(pick([
+      `За ${fmt(num)}? Ты серьёзно? Минимум ${fmt(counter)}.`,
+      `Ха-ха, ${fmt(num)}. Назови реальную цену — ${fmt(counter)}.`,
+      `За такие деньги я лучше сам пользоваться буду. ${fmt(counter)}.`,
+    ]));
+    return unlockChat();
+  }
+
+  // Повтор той же цены
   if (tc.repeats >= 2) {
-    it.npc.patience -= 25; if (it.npc.patience <= 0) return npcLeaves();
-    npcSay(pick(['Ты уже предлагал столько же. Я своё слово сказал.', 'Сколько раз повторять? Не пойдёт за эту сумму.', 'Ты меня не слышишь. Другую цену назови.']));
-    return finishTurn();
+    it.npc.patience -= 25;
+    if (it.npc.patience <= 0) return npcLeaves();
+    npcSay(pick([
+      'Ты уже предлагал столько же. Я своё слово сказал.',
+      'Сколько раз повторять? Не пойдёт за эту сумму.',
+      'Ты меня не слышишь. Другую цену назови.',
+    ]));
+    return unlockChat();
   }
-  const gap = it.minPrice - num, gapRatio = gap / it.minPrice;
+
+  // Обычный торг
+  const gap = it.minPrice - num;
+  const gapRatio = gap / it.minPrice;
+
   if (gapRatio <= 0.06) {
     it.npc.patience -= 6;
-    if (Math.random() < 0.45 || intents.includes('accept')) return acceptSellerDeal(num);
+    if (Math.random() < 0.4 || intents.includes('accept')) return acceptSellerDeal(num);
     const c = round100(Math.min(num * 1.06, it.minPrice));
-    npcSay(pick([`Почти договорились. ${fmt(c)} — и по рукам.`, `Ещё чуть-чуть. Давай ${fmt(c)}, и забирай.`, `Согласен почти. Добавь до ${fmt(c)} — и расходимся.`]));
+    npcSay(pick([
+      `Почти договорились. ${fmt(c)} — и по рукам.`,
+      `Ещё чуть-чуть. Давай ${fmt(c)}.`,
+      `Согласен почти. Добавь до ${fmt(c)}.`,
+    ]));
   } else if (gapRatio <= 0.15) {
     it.npc.patience -= 14;
     const c = round100(it.minPrice * rnd(1.0, 1.03));
-    npcSay(pick([`${fmt(num)} мало. ${fmt(c)} — и забирай.`, `Добавь до ${fmt(c)}, и договорились.`, `Могу отдать за ${fmt(c)}, но не меньше.`]));
-  } else if (gapRatio <= 0.3) {
-    it.npc.patience -= 22;
-    const c = round100(it.minPrice * rnd(1.03, 1.08));
-    npcSay(pick([`Серьёзно? ${fmt(num)} — это сильно ниже. Минимум ${fmt(c)}.`, `Не пойдёт за ${fmt(num)}. Реальная цена — ${fmt(c)}.`, `${fmt(c)}, и я закрою глаза на твою наглость.`]));
+    npcSay(pick([
+      `${fmt(num)} мало. ${fmt(c)} — и забирай.`,
+      `Добавь до ${fmt(c)}, и договорились.`,
+      `Могу отдать за ${fmt(c)}, но не меньше.`,
+    ]));
   } else {
-    it.npc.patience -= 35; if (it.npc.patience <= 0) return npcLeaves();
-    const c = round100(it.minPrice * rnd(1.05, 1.12));
-    npcSay(pick([`За ${fmt(num)} я даже разговаривать не буду. ${fmt(c)} — вот это разговор.`, `Ты издеваешься? Такое и за ${fmt(c)} не каждый день.`, `Ха-ха, ${fmt(num)}. Назови реальную цену.`]));
+    it.npc.patience -= 22;
+    const c = round100(it.minPrice * rnd(1.05, 1.10));
+    npcSay(pick([
+      `Серьёзно? ${fmt(num)} — это сильно ниже. Минимум ${fmt(c)}.`,
+      `Не пойдёт за ${fmt(num)}. Реальная цена — ${fmt(c)}.`,
+      `${fmt(c)}, и я закрою глаза на твою наглость.`,
+    ]));
   }
   if (it.npc.patience <= 0) return npcLeaves();
-  finishTurn();
+  unlockChat();
 }
 
 function npcLeaves() {
   tradeChat.done = true;
-  npcSay(pick(['Всё, терпение лопнуло. Не хочу больше с тобой торговаться. 👋', 'Устал я от этого торга. Продам другому.', 'Хватит. Настроение пропало.', 'Не умеешь ты торговаться. Всё, до свидания.']));
+  npcSay(pick([
+    'Всё, терпение лопнуло. Не хочу больше с тобой торговаться. 👋',
+    'Устал я от этого торга. Продам другому.',
+    'Хватит. Настроение пропало, ничего тебе не продам.',
+    'Не умеешь ты торговаться. Всё, до свидания.',
+  ]));
   sysSay('Продавец ушёл из чата', 'bad');
   state.market = state.market.filter(x => x.uid !== tradeChat.item.uid);
   refillMarket(); saveGame();
   renderChatBox(); renderQuickBtns();
-  setTimeout(() => { if ($('#chatBox')) { closeModal(); renderView(); } }, 1800);
+  setTimeout(() => { if ($('#chatBox')) { closeModal(); renderView(); } }, 2200);
 }
 
 function acceptSellerDeal(price) {
@@ -1073,16 +1518,18 @@ function acceptSellerDeal(price) {
   addToInventory(it, price);
   state.market = state.market.filter(x => x.uid !== it.uid);
   refillMarket(); state.stats.bought++;
-  npcSay(pick([`По рукам! 🤝 Забирай за ${fmt(price)}.`, `Договорились! ${fmt(price)} — и вещь твоя.`, `Отлично, ${fmt(price)}. Спасибо!`]));
+  npcSay(pick([
+    `По рукам! 🤝 Забирай за ${fmt(price)}.`,
+    `Договорились! ${fmt(price)} — и вещь твоя.`,
+    `Отлично, ${fmt(price)}. Спасибо!`,
+  ]));
   sysSay(`Вы купили «${esc(it.name)}» за ${fmt(price)}`, 'ok');
   renderChatBox(); renderQuickBtns(); renderPlayerBar();
   saveGame(); popMoney(price, false);
   setTimeout(() => { closeModal(); renderView(); }, 1500);
 }
 
-function finishTurn() { renderChatBox(); renderQuickBtns(); renderPlayerBar(); }
-
-/* ===== ФОРМА ВЫСТАВЛЕНИЯ СО СЛАЙДЕРОМ ===== */
+/* ===== ФОРМА ВЫСТАВЛЕНИЯ ===== */
 function openListForm(invUid) {
   const item = state.inventory.find(i => i.uid === invUid);
   if (!item) return;
@@ -1108,7 +1555,6 @@ function openListForm(invUid) {
         <input type="range" class="price-slider" id="priceSlider" min="${minRec}" max="${maxRec}" value="${suggested}" step="100" oninput="syncPriceFromSlider(this.value)">
       </div>
       <input type="number" id="sellPrice" value="${suggested}" min="100" step="100" oninput="syncPriceFromInput(this.value)">
-      <div class="hint">Двигай ползунок или введи точную сумму. Чем ниже цена — тем быстрее купят.</div>
     </div>
     <div class="field">
       <label>Срок размещения</label>
@@ -1126,21 +1572,14 @@ function openListForm(invUid) {
     </div>
   `);
 }
-
 function syncPriceFromSlider(v) {
-  const inp = document.getElementById('sellPrice');
-  if (inp) inp.value = v;
-  const disp = document.getElementById('priceDisplay');
-  if (disp) disp.textContent = fmt(+v);
+  const inp = document.getElementById('sellPrice'); if (inp) inp.value = v;
+  const disp = document.getElementById('priceDisplay'); if (disp) disp.textContent = fmt(+v);
 }
-
 function syncPriceFromInput(v) {
   const slider = document.getElementById('priceSlider');
-  if (!slider) return;
-  const min = +slider.min, max = +slider.max, num = +v;
-  if (num >= min && num <= max) slider.value = num;
-  const disp = document.getElementById('priceDisplay');
-  if (disp) disp.textContent = fmt(Math.max(100, num || 0));
+  if (slider) { const min = +slider.min, max = +slider.max, num = +v; if (num >= min && num <= max) slider.value = num; }
+  const disp = document.getElementById('priceDisplay'); if (disp) disp.textContent = fmt(Math.max(100, +v || 0));
 }
 
 function createListing(invUid) {
@@ -1156,7 +1595,7 @@ function createListing(invUid) {
   toast('📢 Объявление опубликовано', `${item.name} за ${fmt(price)} · ${dur} ч`);
 }
 
-/* ===== ИГРОВОЙ ТИК ===== */
+/* ===== ТИК ===== */
 const TICK_MIN = 6;
 function gameTick() {
   state.gameMin += TICK_MIN;
@@ -1185,7 +1624,7 @@ function spawnBuyer(L) {
     name: pick(NPC_NAMES), avatar: pick(NPC_AVATARS),
     offer: round100(L.price * rnd(0.84, 0.98)),
     maxPrice: round100(L.price * rnd(1.0, 1.13)),
-    messages: [], done: false, lastOffer: null,
+    messages: [], done: false, lastOffer: null, typing: false,
   };
   toastBuyer(L);
 }
@@ -1246,11 +1685,20 @@ function renderBuyerChatBox() {
   const box = $('#chatBox');
   if (!box) return;
   const b = buyChat.buyer;
-  box.innerHTML = b.messages.map(m => {
+  let html = b.messages.map(m => {
     if (m.who === 'sys') return `<div class="msg-sys ${m.cls || ''}">${m.text}</div>`;
-    if (m.who === 'me') return `<div class="msg me"><div class="msg-av">${state.player.avatar}</div><div class="msg-bubble">${m.text}</div></div>`;
+    if (m.who === 'me') {
+      const avHtml = state.player.avatarImage
+        ? `<div class="msg-av"><img src="${state.player.avatarImage}" alt=""></div>`
+        : `<div class="msg-av">${state.player.avatar}</div>`;
+      return `<div class="msg me">${avHtml}<div class="msg-bubble">${m.text}</div></div>`;
+    }
     return `<div class="msg npc"><div class="msg-av">${b.avatar}</div><div class="msg-bubble">${m.text}</div></div>`;
   }).join('');
+  if (b.typing) {
+    html += `<div class="msg npc"><div class="msg-av">${b.avatar}</div><div class="typing-bubble"><span class="typing-dot"></span><span class="typing-dot"></span><span class="typing-dot"></span></div></div>`;
+  }
+  box.innerHTML = html;
   box.scrollTop = box.scrollHeight;
 }
 
@@ -1259,6 +1707,7 @@ function renderBuyerQuick() {
   if (!box) return;
   const b = buyChat.buyer;
   if (b.done) { box.innerHTML = ''; return; }
+  box.classList.toggle('locked', b.typing);
   box.innerHTML = `
     <button class="qbtn" onclick="acceptBuyerOffer()">✅ Принять ${fmt(b.offer)}</button>
     <button class="qbtn" onclick="buyerCounter(${buyChat.price})">Настаивать на ${fmt(buyChat.price)}</button>
@@ -1267,29 +1716,43 @@ function renderBuyerQuick() {
 
 function buySys(t, c) { buyChat.buyer.messages.push({ who: 'sys', text: t, cls: c }); }
 
-function sendBuyMsg() {
+async function sendBuyMsg() {
   const f = $('#chatField');
-  if (!f) return;
+  if (!f || !buyChat || buyChat.buyer.done || buyChat.buyer.typing) return;
   const text = f.value.trim();
   if (!text) return;
   f.value = '';
   buyChat.buyer.messages.push({ who: 'me', text: esc(text) });
+  const b = buyChat.buyer;
+  b.typing = true;
+  renderBuyerChatBox(); renderBuyerQuick();
+  f.disabled = true;
+
+  await sleep(rnd(3000, 6000));
+  if (!buyChat || buyChat.buyer !== b) return;
+  b.typing = false;
+
   const num = extractNumber(text);
   const intents = detectIntents(text);
-  if (num !== null) return buyerCounter(num, intents);
-  const b = buyChat.buyer;
+  if (num !== null) {
+    f.disabled = false;
+    return buyerCounter(num, intents);
+  }
+
   if (intents.includes('ask_condition')) b.messages.push({ who: 'npc', text: 'А есть какие-то дефекты? Хочу знать заранее.' });
   else if (intents.includes('greeting') && b.messages.length <= 2) b.messages.push({ who: 'npc', text: 'Да, я по объявлению. Готов обсудить.' });
   else if (intents.includes('ask_delivery')) b.messages.push({ who: 'npc', text: 'Самовывоз удобнее. Когда можно подъехать?' });
   else if (intents.includes('ask_accessories')) b.messages.push({ who: 'npc', text: 'Комплект полный? Коробка, документы?' });
   else if (intents.includes('ask_discount')) b.messages.push({ who: 'npc', text: 'Если скинете — возьму прямо сейчас.' });
   else b.messages.push({ who: 'npc', text: pick(['Так что по цене? Назовите цифру.', 'Сколько хотите?', 'Мне нужно понимать итоговую сумму.']) });
+
+  f.disabled = false;
   renderBuyerChatBox(); renderBuyerQuick();
 }
 
 function acceptBuyerOffer() {
   const L = buyChat;
-  if (!L || L.buyer.done) return;
+  if (!L || L.buyer.done || L.buyer.typing) return;
   L.buyer.done = true;
   L.buyer.messages.push({ who: 'npc', text: 'Отлично! Договорились 🤝' });
   buySys(`Сделка: ${esc(L.item.name)} за ${fmt(L.buyer.offer)}`, 'ok');
@@ -1300,7 +1763,7 @@ function acceptBuyerOffer() {
 
 function rejectBuyer() {
   const L = buyChat;
-  if (!L || L.buyer.done) return;
+  if (!L || L.buyer.done || L.buyer.typing) return;
   L.buyer.done = true;
   L.buyer.messages.push({ who: 'npc', text: 'Жаль. Если передумаете — я на связи.' });
   buySys('Покупатель ушёл', 'bad');
@@ -1360,6 +1823,7 @@ function toast(title, text) {
 function init() {
   if (!loadGame()) newGame();
   else { refillMarket(); setTimeout(() => toast('💾 Сохранение загружено', `${state.player.name} · ${fmt(state.player.money)}`), 400); }
+  applyTheme(state.theme);
   renderTabs(); renderView();
   setInterval(gameTick, 1000);
   setInterval(saveGame, 5000);
